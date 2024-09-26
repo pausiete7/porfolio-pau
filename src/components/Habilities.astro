@@ -1,0 +1,159 @@
+---
+import Dart from "../icons/DartIcon.astro";
+import Flutter from "../icons/FlutterIcon.astro";
+import Supabase from "../icons/SupabaseIcon.astro";
+import React from "../icons/ReactIcon.astro";
+import Postgre from "../icons/PostgreIcon.astro";
+import Js from "../icons/JavaScriptIcon.astro";
+import Python from "../icons/PythonIcon.astro";
+import C from "../icons/CIcon.astro";
+import Astr from "../icons/AstroIcon.astro";
+import Html from "../icons/HtmlIcon.astro";
+import Css from "../icons/CssIcon.astro";
+import Tailwind from "../icons/TailwindIcon.astro";
+import Figma from "../icons/FigmaIcon.astro";
+import Vs from "../icons/VSIcon.astro";
+import Git from "../icons/GitIcon.astro";
+import Github from "../icons/GitHubIcon.astro";
+import DigitalOcean from "../icons/DigitalOceanIcon.astro";
+import Postman from "../icons/PostManIcon.astro";
+
+const TAGS = {
+  DART: {
+    name: "Dart",
+    class: "bg-[#0175C2] text-white",
+    icon: Dart,
+  },
+  FLUTTER: {
+    name: "Flutter",
+    class: "bg-[#02569B] text-white",
+    icon: Flutter,
+  },
+  SUPABASE: {
+    name: "Supabase",
+    class: "bg-[#333333] text-white",
+    icon: Supabase,
+  },
+  REACT: {
+    name: "React",
+    class: "bg-[#61DAFB] text-white",
+    icon: React,
+  },
+  POSTGRE: {
+    name: "PostgreSQL",
+    class: "bg-[#336791] text-white",
+    icon: Postgre,
+  },
+  JS: {
+    name: "JavaScript",
+    class: "bg-[#F7DF1E] text-black",
+    icon: Js,
+  },
+  PYTHON: {
+    name: "Python",
+    class: "bg-[#3776AB] text-white",
+    icon: Python,
+  },
+  C: {
+    name: "C++",
+    class: "bg-[#A8B9CC] text-white",
+    icon: C,
+  },
+  ASTRO: {
+    name: "Astro",
+    class: "bg-[#000000] text-white",
+    icon: Astr,
+  },
+  HTML: {
+    name: "HTML",
+    class: "bg-[#E34F26] text-white",
+    icon: Html,
+  },
+  CSS: {
+    name: "CSS",
+    class: "bg-[#0C73B8] text-white",
+    icon: Css,
+  },
+  TAILWIND: {
+    name: "Tailwind",
+    class: "bg-[#38B2AC] text-white",
+    icon: Tailwind,
+  },
+  FIGMA: {
+    name: "Figma",
+    class: "bg-[#F24E1E] text-white",
+    icon: Figma,
+  },
+  VS: {
+    name: "VSCode",
+    class: "bg-[#007ACC] text-white",
+    icon: Vs,
+  },
+  GIT: {
+    name: "Git",
+    class: "bg-[#3E2C00] text-white",
+    icon: Git,
+  },
+  GITHUB: {
+    name: "GitHub",
+    class: "bg-[#181717] text-white",
+    icon: Github,
+  },
+  DIGITALOCEAN: {
+    name: "DigitalOcean",
+    class: "bg-[#0080FF] text-white",
+    icon: DigitalOcean,
+  },
+  POSTMAN: {
+    name: "Postman",
+    class: "bg-[#FF6C37] text-white",
+    icon: Postman,
+  },
+};
+
+const BLOCS = [
+  {
+    title: "FRONTEND",
+    tags: [
+      TAGS.FLUTTER,
+      TAGS.REACT,
+      TAGS.ASTRO,
+      TAGS.HTML,
+      TAGS.CSS,
+      TAGS.TAILWIND,
+    ],
+  },
+  {
+    title: "BACKEND",
+    tags: [TAGS.SUPABASE, TAGS.POSTGRE, TAGS.DIGITALOCEAN],
+  },
+  {
+    title: "LENGUAJES DE PROGRAMACIÓN",
+    tags: [TAGS.DART, TAGS.JS, TAGS.PYTHON, TAGS.C],
+  },
+  {
+    title: "HERRAMIENTAS",
+    tags: [TAGS.FIGMA, TAGS.VS, TAGS.GIT, TAGS.GITHUB, TAGS.POSTMAN],
+  },
+];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {
+    BLOCS.map(({ title, tags }) => (
+      <section class="flex flex-col items-center bg-gray-800/70 rounded-lg  shadow-lg p-6 h-full border border-blue-500">
+        <h2 class="text-xl font-bold text-blue-500 pb-4 ">{title}</h2>
+        <ul class="grid grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+          {tags.map((tag) => (
+            <li
+              class={`flex flex-col gap-y-2 rounded-lg items-center justify-between text-sm shadow-2xl bg-gray-800 p-4 border border-blue-500  transition hover:scale-105`}
+            >
+              <tag.icon class="size-9" />
+              <h3 class="text-xs ">{tag.name}</h3>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>

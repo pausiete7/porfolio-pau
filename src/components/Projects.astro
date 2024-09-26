@@ -1,0 +1,77 @@
+---
+import Dart from "../icons/DartIcon.astro";
+import Flutter from "../icons/FlutterIcon.astro";
+import Supabase from "../icons/SupabaseIcon.astro";
+import LinkIcon from "../icons/LinkIcon.astro";
+import LinkButton from "./LinkButton.astro";
+
+const TAGS = {
+  DART: {
+    name: "Dart",
+    class: "bg-[#0175C2] text-white",
+    icon: Dart,
+  },
+  FLUTTER: {
+    name: "Flutter",
+    class: "bg-[#02569B] text-white",
+    icon: Flutter,
+  },
+  SUPABASE: {
+    name: "Supabase",
+    class: "bg-[#333333] text-white",
+    icon: Supabase,
+  },
+};
+
+const PROJECTS = [
+  {
+    title: "Vademecum 2024",
+    description:
+      "Vademecum 2024 es una app de referencia médica que proporciona información actualizada sobre medicamentos, incluyendo indicaciones, dosis y efectos secundarios, dirigida a profesionales de la salud y usuarios interesados en conocer más sobre tratamientos farmacológicos.",
+    link: "#",
+    github: "#",
+    image: "/vademecum.webp",
+    tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SUPABASE],
+  },
+];
+---
+
+<div class="flex flex-col gap-y-16">
+  {
+    PROJECTS.map(({ title, description, tags, image, link }) => (
+      <div class="border rounded-lg shadow lg:max-w-full  border-gray-700 bg-gray-800 flex flex-col gap-y-6 mx-auto lg:flex-row lg:gap-x-6 items-stretch">
+        <img
+          class="object-cover w-full rounded-t-lg md:rounded-none md:rounded-s-lg h-96  "
+          src={image}
+          alt=""
+        />
+        <div class="flex flex-col justify-between p-4 leading-normal mb-5">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
+            {title}
+          </h5>
+          <ul class="flex flex-row mb-5 gap-x-2">
+            {tags.map((tag) => (
+              <li>
+                <span
+                  class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+                >
+                  <tag.icon class="size-4" />
+                  {tag.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p class="mb-3 font-normal text-gray-300">{description}</p>
+          <footer class="flex items-end justify-start mt-4 gap-x-4">
+            {link && (
+              <LinkButton href={link}>
+                <LinkIcon class="size-4" />
+                Preview
+              </LinkButton>
+            )}
+          </footer>
+        </div>
+      </div>
+    ))
+  }
+</div>
