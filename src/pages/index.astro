@@ -13,29 +13,12 @@ import BrainIcon from "../icons/BrainIcon.astro";
 import CodeIcon from "../icons/CodeIcon.astro";
 ---
 
-<Layout
-  title="Porfolio de Pau Sevilla - Desarrollador y Programador Web, Applicaciones con 4 años de exper	iencia"
-  description="Comtrata a Pau Sevilla para crear tu aplicación web o móvil. Desarrollador web y de aplicaciones"
->
+<Layout>
   <main class="px-4">
     <SectionContainer class="pt-16 md:pt-32 pb-20">
       <Hero>
         <slot />
       </Hero>
-    </SectionContainer>
-    <SectionContainer id="proyectos">
-      <TitleSection>
-        <CodeIcon class="size-7" />
-        Proyectos
-      </TitleSection>
-      <Proyectos />
-    </SectionContainer>
-    <SectionContainer id="habilidades" class="py-20">
-      <TitleSection>
-        <BrainIcon class="size-8" />
-        Habilidades
-      </TitleSection>
-      <Habilities />
     </SectionContainer>
     <SectionContainer id="sobre-mi">
       <TitleSection>
@@ -50,6 +33,20 @@ import CodeIcon from "../icons/CodeIcon.astro";
         Educación
       </TitleSection>
       <Eduacacion />
+    </SectionContainer>
+    <SectionContainer id="proyectos" client:visible>
+      <TitleSection>
+        <CodeIcon class="size-7" />
+        Proyectos
+      </TitleSection>
+      <Proyectos />
+    </SectionContainer>
+    <SectionContainer id="habilidades" class="pt-20" client:visible>
+      <TitleSection>
+        <BrainIcon class="size-8" />
+        Habilidades
+      </TitleSection>
+      <Habilities />
     </SectionContainer>
   </main>
 </Layout>

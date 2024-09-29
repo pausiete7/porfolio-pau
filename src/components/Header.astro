@@ -1,11 +1,6 @@
 ---
 const NAV_ITEMS = [
   {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "/#proyectos",
-  },
-  {
     title: "Sobre mi",
     label: "sobre-mi",
     url: "/#sobre-mi",
@@ -16,14 +11,14 @@ const NAV_ITEMS = [
     url: "/#educacion",
   },
   {
+    title: "Proyectos",
+    label: "proyectos",
+    url: "/#proyectos",
+  },
+  {
     title: "Habilidades",
     label: "habilidades",
     url: "/#habilidades",
-  },
-  {
-    title: "Contacto",
-    label: "contacto",
-    url: "/#contacto",
   },
 ];
 ---
@@ -32,7 +27,7 @@ const NAV_ITEMS = [
   class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
 >
   <nav
-    class="flex px-3 text-xs md:text-base font-medium rounded-full text-gray-200 justify-center items-center"
+    class="flex px-3 text-sm md:text-base font-medium rounded-full text-gray-200 justify-center items-center"
   >
     {
       NAV_ITEMS.map((link) => (

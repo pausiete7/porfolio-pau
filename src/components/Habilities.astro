@@ -17,6 +17,7 @@ import Git from "../icons/GitIcon.astro";
 import Github from "../icons/GitHubIcon.astro";
 import DigitalOcean from "../icons/DigitalOceanIcon.astro";
 import Postman from "../icons/PostManIcon.astro";
+import SQLite from "../icons/SQLiteIcon.astro";
 
 const TAGS = {
   DART: {
@@ -109,6 +110,11 @@ const TAGS = {
     class: "bg-[#FF6C37] text-white",
     icon: Postman,
   },
+  SQLITE: {
+    name: "SQLite",
+    class: "bg-white/80 text-white",
+    icon: SQLite,
+  },
 };
 
 const BLOCS = [
@@ -125,7 +131,7 @@ const BLOCS = [
   },
   {
     title: "BACKEND",
-    tags: [TAGS.SUPABASE, TAGS.POSTGRE, TAGS.DIGITALOCEAN],
+    tags: [TAGS.SUPABASE, TAGS.POSTGRE, TAGS.DIGITALOCEAN, TAGS.SQLITE],
   },
   {
     title: "LENGUAJES DE PROGRAMACIÓN",

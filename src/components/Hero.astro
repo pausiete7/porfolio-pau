@@ -8,56 +8,54 @@ import XIcon from "../icons/XIcon.astro";
 import MailIcon from "../icons/MailIcon.astro";
 ---
 
-<div class="max-w-xl md:max-w-2xl lg:max-w-4xl">
-  <div class="flex gap-4 mb-4">
-    <img
-      class="rounded-full size-12 md:size-16 shadow-lg"
-      src="/pau.jpg"
-      alt="Pau Sevilla photo"
-    />
-    <a
-      href="https://www.linkedin.com/in/pau-sevilla"
-      target="_blank"
-      rel="noopener"
-      class="flex items-center transition md:justify-center md:hover:scale-105"
-    >
-      <Badge>Disponible para trabajar</Badge>
-    </a>
-  </div>
-  <h1 class="text-4xl font-bold tracking-tight sm:text-5xl text-white">
-    Hey! Soy Pau Sevilla
-  </h1>
-  <p class="text-lg lg:text-xl opacity-80 text-wrap mt-6">
-    Soy estudiante de Ingeniería Informática en la FIB (UPC de Barcelona).
-    Apasionado por la <span class="font-bold text-blue-500"
-      >tecnología y el desarrollo de software</span
-    >, siempre estoy buscando nuevas formas de aprender y crecer en el mundo de
-    la informática. Vivo en Barcelona, España y disfruto de enfrentarme a nuevos
-    retos, con el objetivo de transformar ideas en soluciones innovadoras.
-    <span class="font-bold text-blue-500">
-      ¡Bienvenido a mi espacio personal!</span
-    >
-  </p>
-  <nav class="flex gap-4 mt-8 flex-wrap">
-    <SocialPill href="https://www.linkedin.com/in/pau-sevilla">
-      <LinkedinIcon class="size-4 md:size-6" />
-      Linkedin
-    </SocialPill>
-    <SocialPill href="https://github.com/pausiete7">
-      <GitHubIcon class="size-4 md:size-6" />
-      Github
-    </SocialPill>
-    <SocialPill href="https://www.instagram.com/pausiete7/">
-      <InstagramIcon class="size-4 md:size-6" />
-      Instagram
-    </SocialPill>
-    <SocialPill href="https://x.com/pausiete7">
-      <XIcon class="size-3 md:size-5" />
-      X
-    </SocialPill>
-    <SocialPill href="https://github.com/pausiete7">
-      <MailIcon class="size-4 md:size-6" />
-      pau.sevilla@icloud.com
-    </SocialPill>
-  </nav>
+<div class="flex gap-4 mb-4">
+  <img
+    class="rounded-full size-12 md:size-16 shadow-lg"
+    src="/pau.jpg"
+    alt="Pau Sevilla photo"
+  />
+  <a
+    href="https://www.linkedin.com/in/pau-sevilla"
+    target="_blank"
+    rel="noopener"
+    class="flex items-center transition md:justify-center md:hover:scale-105"
+  >
+    <Badge>Disponible para trabajar</Badge>
+  </a>
 </div>
+<h1 class="text-4xl font-bold tracking-tight sm:text-5xl text-white">
+  Hey! Soy Pau Sevilla
+</h1>
+<p class="text-lg lg:text-xl opacity-80 text-wrap mt-6 text-justify">
+  Soy estudiante de Ingeniería Informática en la FIB (UPC de Barcelona).
+  Apasionado por la <span class="font-bold text-blue-500"
+    >tecnología y el desarrollo de software</span
+  >, siempre estoy buscando nuevas formas de aprender y crecer en el mundo de la
+  informática. Vivo en Barcelona, España y disfruto de enfrentarme a nuevos
+  retos, con el objetivo de transformar ideas en soluciones innovadoras.
+  <span class="font-bold text-blue-500">
+    ¡Bienvenido a mi espacio personal!</span
+  >
+</p>
+<nav class="flex gap-4 mt-8 flex-wrap">
+  <SocialPill target="_blank" href="https://www.linkedin.com/in/pau-sevilla">
+    <LinkedinIcon class="size-5 md:size-6" />
+    <h2 class="text-sm md:text-sm">Linkedin</h2>
+  </SocialPill>
+  <SocialPill target="_blank" href="https://github.com/pausiete7">
+    <GitHubIcon class="size-5 md:size-6" />
+    <h2 class="text-sm md:text-sm">GitHub</h2>
+  </SocialPill>
+  <SocialPill target="_blank" href="https://www.instagram.com/pausiete7/">
+    <InstagramIcon class="size-5 md:size-6" />
+    <h2 class="text-sm md:text-sm">Instagram</h2>
+  </SocialPill>
+  <SocialPill target="_blank" href="https://x.com/pausiete7">
+    <XIcon class="size-4 md:size-5" />
+    <h2 class="text-sm md:text-sm">X</h2>
+  </SocialPill>
+  <SocialPill href="mailto:pau.sevilla@icloud.com">
+    <MailIcon class="size-5 md:size-6" />
+    <h2 class="text-sm md:text-sm">pau.sevilla@icloud.com</h2>
+  </SocialPill>
+</nav>

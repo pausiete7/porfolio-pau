@@ -1,0 +1,95 @@
+---
+// src/pages/project/[slug].astro
+// Parte de importación y definición de rutas
+import ProjectDetail from "../../components/ProjectDetail.astro";
+import Dart from "../../icons/DartIcon.astro";
+import Flutter from "../../icons/FlutterIcon.astro";
+import Supabase from "../../icons/SupabaseIcon.astro";
+import SQLite from "../../icons/SQLiteIcon.astro";
+import GitHubIcon from "../../icons/GitHubIcon.astro";
+import AppStoreIcon from "../../icons/AppStoreIcon.astro";
+import GooglePlayIcon from "../../icons/GooglePlayIcon.astro";
+
+const TAGS = {
+  DART: {
+    name: "Dart",
+    class: "bg-[#0175C2] text-white",
+    icon: Dart,
+  },
+  FLUTTER: {
+    name: "Flutter",
+    class: "bg-[#02569B] text-white",
+    icon: Flutter,
+  },
+  SUPABASE: {
+    name: "Supabase",
+    class: "bg-[#333333] text-white",
+    icon: Supabase,
+  },
+  SQLITE: {
+    name: "SQLite",
+    class: "bg-gray-500/80 text-white",
+    icon: SQLite,
+  },
+};
+
+const projectData = [
+  {
+    slug: "vademecum-2024",
+    title: "Vademecum 2024",
+    title_l: "Vademecum 2024 - Referencia Médica",
+    date: "Octubre de 2023",
+    description:
+      "Vademecum 2024 es una aplicación completa y actualizada que ofrece información detallada sobre medicamentos y tratamientos médicos. Está diseñada tanto para profesionales de la salud como para el público en general que desea conocer más sobre el uso adecuado de los fármacos. La app incluye fichas técnicas de medicamentos, indicaciones terapéuticas, contraindicaciones, efectos secundarios y dosis recomendadas, así como interacciones con otros medicamentos y advertencias especiales. Además, cuenta con un buscador avanzado que facilita la localización rápida de información específica, y se actualiza constantemente para asegurar que los usuarios dispongan de datos precisos y actualizados sobre más de 20.000 medicamentos disponibles en el mercado. Ideal para médicos, farmacéuticos, estudiantes de ciencias de la salud y cualquier persona interesada en un uso responsable de la medicación.",
+    tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SQLITE],
+    imgs: ["/vad1.webp", "/vad2.webp", "/vad3.webp", "/vad4.webp"],
+    links: [
+      {
+        icon: AppStoreIcon,
+        titleSection: "App Store",
+        link: "https://apps.apple.com/es/app/vademecum-2023-medicamentos/id1187696022",
+      },
+      {
+        icon: GooglePlayIcon,
+        titleSection: "Google Play",
+        link: "https://play.google.com/store/apps/details?id=es.impulsit.vademecum&hl=es",
+      },
+    ],
+  },
+  {
+    slug: "pickupwatch",
+    title: "PickUpWatch",
+    title_l: "PickUpWatch - Sistema de Seguridad Escolar",
+    date: "Septiembre de 2023",
+    description:
+      "PickUpWatch es un sistema de seguridad inteligente que utiliza reconocimiento facial para identificar a los padres o tutores autorizados en el momento de recoger a los niños en la escuela. Cuando una persona registrada se acerca al centro educativo, el sistema detecta su rostro y envía una notificación automática al profesor responsable, confirmando que se trata de alguien autorizado para llevarse al menor. Esto permite asegurar que solo las personas previamente verificadas puedan recoger a los estudiantes, mejorando significativamente la seguridad durante las salidas escolares. Además, el sistema optimiza el proceso de recogida, evitando confusiones y posibles errores, y ofreciendo una solución tecnológica avanzada que aporta tranquilidad tanto a los padres como al personal docente.",
+    tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SUPABASE],
+    imgs: ["/pick1.webp", "/pick2.webp"],
+    links: [
+      {
+        icon: GitHubIcon,
+        titleSection: "GitHub",
+        link: "https://github.com/pausiete7/pickUpWatch",
+      },
+    ],
+  },
+  // Añadir más proyectos aquí si es necesario
+];
+
+// Código que se ejecuta después de la construcción
+export function getStaticPaths() {
+  return [
+    { params: { slug: "vademecum-2024" } },
+    { params: { slug: "pickupwatch" } },
+  ];
+}
+
+const { slug } = Astro.params;
+const project = projectData.find((proj) => proj.slug === slug);
+
+if (!project) {
+  throw new Error(`Proyecto con slug "${slug}" no encontrado.`);
+}
+---
+
+<ProjectDetail {...project} />;

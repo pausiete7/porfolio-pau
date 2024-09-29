@@ -4,6 +4,8 @@ import Flutter from "../icons/FlutterIcon.astro";
 import Supabase from "../icons/SupabaseIcon.astro";
 import LinkIcon from "../icons/LinkIcon.astro";
 import LinkButton from "./LinkButton.astro";
+import SQLite from "../icons/SQLiteIcon.astro";
+import GitHubIcon from "../icons/GitHubIcon.astro";
 
 const TAGS = {
   DART: {
@@ -21,6 +23,11 @@ const TAGS = {
     class: "bg-[#333333] text-white",
     icon: Supabase,
   },
+  SQLITE: {
+    name: "SQLite",
+    class: "bg-gray-500/80 text-white",
+    icon: SQLite,
+  },
 };
 
 const PROJECTS = [
@@ -28,17 +35,27 @@ const PROJECTS = [
     title: "Vademecum 2024",
     description:
       "Vademecum 2024 es una app de referencia médica que proporciona información actualizada sobre medicamentos, incluyendo indicaciones, dosis y efectos secundarios, dirigida a profesionales de la salud y usuarios interesados en conocer más sobre tratamientos farmacológicos.",
-    link: "#",
-    github: "#",
+    link: "/project/vademecum-2024",
     image: "/vademecum.webp",
+    tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SQLITE],
+    slug: "vademecum-2024",
+  },
+  {
+    title: "PickUpWatch",
+    description:
+      "PickUpWatch es un sistema de seguridad inteligente que utiliza reconocimiento facial para detectar la llegada de los padres a la escuela y notificar a los profesores. Esto garantiza que solo personas autorizadas puedan recoger a los niños, mejorando la seguridad durante las salidas.",
+    link: "/project/pickupwatch",
+    github: "https://github.com/pausiete7/pickUpWatch",
+    image: "/pickupwatch.webp",
     tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SUPABASE],
+    slug: "pickupwatch",
   },
 ];
 ---
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ title, description, tags, image, link }) => (
+    PROJECTS.map(({ title, description, tags, image, link, github, slug }) => (
       <div class="border rounded-lg shadow lg:max-w-full  border-gray-700 bg-gray-800 flex flex-col gap-y-6 mx-auto lg:flex-row lg:gap-x-6 items-stretch">
         <img
           class="object-cover w-full rounded-t-lg md:rounded-none md:rounded-s-lg h-96  "
@@ -61,12 +78,18 @@ const PROJECTS = [
               </li>
             ))}
           </ul>
-          <p class="mb-3 font-normal text-gray-300">{description}</p>
+          <p class="mb-3 font-normal text-gray-300 ">{description}</p>
           <footer class="flex items-end justify-start mt-4 gap-x-4">
             {link && (
               <LinkButton href={link}>
                 <LinkIcon class="size-4" />
-                Preview
+                Ver más
+              </LinkButton>
+            )}
+            {github && (
+              <LinkButton  href={github}, target="_blank">
+                <GitHubIcon class="size-4" />
+                Github
               </LinkButton>
             )}
           </footer>
