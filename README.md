@@ -8,7 +8,6 @@ Este portfolio está construido utilizando las siguientes tecnologías:
 
 - **Astro** - Framework web moderno que ofrece rendimiento excepcional
 - **Angular** - Framework robusto para aplicaciones web dinámicas
-- **HTML5 & CSS3** - Para estructura y estilos
 
 ### Características
 
