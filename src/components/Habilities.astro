@@ -18,7 +18,9 @@ import Github from "../icons/GitHubIcon.astro";
 import DigitalOcean from "../icons/DigitalOceanIcon.astro";
 import Postman from "../icons/PostManIcon.astro";
 import SQLite from "../icons/SQLiteIcon.astro";
-
+import Angular from "../icons/AngularIcon.astro";
+import Laravel from "../icons/Laravelcon.astro";
+import TypeScript from "../icons/TypeScript.astro";
 const TAGS = {
   DART: {
     name: "Dart",
@@ -115,6 +117,21 @@ const TAGS = {
     class: "bg-white/80 text-white",
     icon: SQLite,
   },
+  ANGULAR: {
+    name: "Angular",
+    class: "bg-[#DD0031] text-white",
+    icon: Angular,
+  },
+  LARAVEL: {
+    name: "Laravel",
+    class: "bg-[#FF2D20] text-white",
+    icon: Laravel,
+  },
+  TYPESCRIPT: {
+    name: "TypeScript",
+    class: "bg-[#007ACC] text-white",
+    icon: TypeScript,
+  },
 };
 
 const BLOCS = [
@@ -127,15 +144,22 @@ const BLOCS = [
       TAGS.HTML,
       TAGS.CSS,
       TAGS.TAILWIND,
+      TAGS.ANGULAR,
     ],
   },
   {
     title: "BACKEND",
-    tags: [TAGS.SUPABASE, TAGS.POSTGRE, TAGS.DIGITALOCEAN, TAGS.SQLITE],
+    tags: [
+      TAGS.SUPABASE,
+      TAGS.POSTGRE,
+      TAGS.DIGITALOCEAN,
+      TAGS.SQLITE,
+      TAGS.LARAVEL,
+    ],
   },
   {
     title: "LENGUAJES DE PROGRAMACIÓN",
-    tags: [TAGS.DART, TAGS.JS, TAGS.PYTHON, TAGS.C],
+    tags: [TAGS.DART, TAGS.JS, TAGS.PYTHON, TAGS.C, TAGS.TYPESCRIPT],
   },
   {
     title: "HERRAMIENTAS",

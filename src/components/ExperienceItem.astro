@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+  link?: string;
+  image?: string;
+}
+
+const { title, description, date, link, image } = Astro.props;
+---
+
+<div
+  class="relative mx-8 pb-12 grid gap-y-2 before:absolute before:left-[-19px] before:block before:h-full before:border-l-2 before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4]"
+>
+  <div class="relative pb-12 md:col-span-2 p-4 bg-gray-800/70 rounded-lg">
+    <div class="sticky top-0 flex flex-col items-center text-center gap-y-2">
+      <span class="text-blue-500 -left-[42px] absolute rounded-full text-5xl"
+        >&bull;</span
+      >
+
+      <h3 class="text-xl font-semibold text-blue-500">{title}</h3>
+      <time class="text-sm text-gray-300">{date}</time>
+
+      {
+        link && image && (
+          <div class="flex flex-col items-center gap-y-2 mt-2">
+            <div class="w-24 h-10 flex items-center justify-center">
+              <img
+                src={image}
+                alt="Company logo"
+                class="max-w-full max-h-full object-contain rounded-lg"
+              />
+            </div>
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-gray-300 hover:text-white hover:scale-105 transition inline-flex items-center gap-x-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Visitar empresa
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </div>
+  <div
+    class="relative flex flex-col gap-2 text-gray-300 md:col-span-3 p-4 bg-gray-800/70 rounded-lg"
+  >
+    {description}
+  </div>
+</div>

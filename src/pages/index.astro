@@ -11,6 +11,8 @@ import BooksIcons from "../icons/BooksIcons.astro";
 import ProfileIcon from "../icons/ProfileIcon.astro";
 import BrainIcon from "../icons/BrainIcon.astro";
 import CodeIcon from "../icons/CodeIcon.astro";
+import Experience from "../components/Experience.astro";
+import BriefcaseIcon from "../icons/BriefcaseIcon.astro";
 ---
 
 <Layout>
@@ -25,12 +27,12 @@ import CodeIcon from "../icons/CodeIcon.astro";
       </TitleSection>
       <AboutMe />
     </SectionContainer>
-    <SectionContainer id="educacion" class="py-20">
+    <SectionContainer id="experiencia" class="py-20">
       <TitleSection>
-        <BooksIcons class="size-8" />
-        Educación
+        <BriefcaseIcon class="size-8" />
+        Experiencia Laboral
       </TitleSection>
-      <Eduacacion />
+      <Experience />
     </SectionContainer>
     <SectionContainer id="proyectos">
       <TitleSection>
@@ -38,6 +40,13 @@ import CodeIcon from "../icons/CodeIcon.astro";
         Proyectos
       </TitleSection>
       <Proyectos />
+    </SectionContainer>
+    <SectionContainer id="educacion" class="py-20">
+      <TitleSection>
+        <BooksIcons class="size-8" />
+        Educación
+      </TitleSection>
+      <Eduacacion />
     </SectionContainer>
     <SectionContainer id="habilidades" class="pt-20">
       <TitleSection>

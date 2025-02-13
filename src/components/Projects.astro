@@ -6,6 +6,10 @@ import LinkIcon from "../icons/LinkIcon.astro";
 import LinkButton from "./LinkButton.astro";
 import SQLite from "../icons/SQLiteIcon.astro";
 import GitHubIcon from "../icons/GitHubIcon.astro";
+import AstroIcon from "../icons/AstroIcon.astro";
+import HTML from "../icons/HtmlIcon.astro";
+import CSS from "../icons/CssIcon.astro";
+import Tailwind from "../icons/TailwindIcon.astro";
 
 const TAGS = {
   DART: {
@@ -28,6 +32,26 @@ const TAGS = {
     class: "bg-gray-500/80 text-white",
     icon: SQLite,
   },
+  ASTRO: {
+    name: "Astro",
+    class: "bg-[#000000] text-white",
+    icon: AstroIcon,
+  },
+  HTML: {
+    name: "HTML",
+    class: "bg-[#000000] text-white",
+    icon: HTML,
+  },
+  CSS: {
+    name: "CSS",
+    class: "bg-[#000000] text-white",
+    icon: CSS,
+  },
+  TAILWIND: {
+    name: "Tailwind",
+    class: "bg-[#000000] text-white",
+    icon: Tailwind,
+  },
 };
 
 const PROJECTS = [
@@ -40,6 +64,16 @@ const PROJECTS = [
     tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SQLITE],
     slug: "vademecum-2024",
   },
+     {
+    title: "Portfolio",
+    description:
+      "Portfolio es un sitio web personal que muestra mis proyectos y habilidades como desarrollador web. Desarrollado con Astro, HTML, CSS y Tailwind.",
+    link: "https://pausevilla.com/",
+    github: "https://github.com/pausiete7/porfolio-pau",
+    image: "/porfolio.webp",
+    tags: [TAGS.ASTRO, TAGS.HTML, TAGS.CSS, TAGS.TAILWIND],
+    slug: "portfolio",
+  },
   {
     title: "PickUpWatch",
     description:
@@ -49,7 +83,7 @@ const PROJECTS = [
     image: "/pickupwatch.webp",
     tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SUPABASE],
     slug: "pickupwatch",
-  },
+  }
 ];
 ---
 
