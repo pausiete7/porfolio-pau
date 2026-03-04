@@ -6,6 +6,11 @@ const NAV_ITEMS = [
     url: "/#sobre-mi",
   },
   {
+    title: "Experiencia Laboral",
+    label: "experiencia",
+    url: "/#experiencia",
+  },
+  {
     title: "Educación",
     label: "educacion",
     url: "/#educacion",
@@ -44,15 +49,15 @@ const NAV_ITEMS = [
 </header>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
+  function setupNavHighlight() {
     const sections = document.querySelectorAll("section");
     const navItems = document.querySelectorAll("header nav a");
 
-    const callback = (entries: any[]) => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
+            if (item.getAttribute("aria-label") === entry.target.id) {
               item.classList.add("text-blue-500");
             } else {
               item.classList.remove("text-blue-500");
@@ -68,20 +73,25 @@ const NAV_ITEMS = [
       threshold: 0.3,
     });
 
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
+    sections.forEach((section) => observer.observe(section));
 
-    // Cleanup function
     document.onvisibilitychange = () => {
       if (document.visibilityState === "hidden") {
         observer.disconnect();
       } else {
-        sections.forEach((section) => {
-          observer.observe(section);
-        });
+        sections.forEach((section) => observer.observe(section));
       }
     };
+
+    return observer;
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    setupNavHighlight();
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    setupNavHighlight();
   });
 </script>
 

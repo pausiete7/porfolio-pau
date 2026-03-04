@@ -1,8 +1,24 @@
 ---
 // ProjectDetail.astro
-import Layout from "../layouts/Layout.astro";
-import LinkButton from "./LinkButton.astro";
-import SectionContainer from "./SectionContainer.astro";
+import { Image } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import LinkButton from "@components/LinkButton.astro";
+import SectionContainer from "@components/SectionContainer.astro";
+
+/** Componente Astro que acepta prop class (iconos) */
+type IconComponent = (props: { class?: string }) => unknown;
+
+interface ProjectTag {
+  name: string;
+  class: string;
+  icon: IconComponent;
+}
+
+interface ProjectLink {
+  titleSection: string;
+  link: string;
+  icon: IconComponent;
+}
 
 interface Props {
   title: string;
@@ -10,15 +26,15 @@ interface Props {
   description: string;
   date: string;
   imgs: string[];
-  tags: any[];
-  links: { titleSection: string; link: string; icon: any }[];
+  tags: ProjectTag[];
+  links: ProjectLink[];
 }
 
 const { title, title_l, description, date, imgs, tags, links } = Astro.props;
 ---
 
 <Layout>
-  <main px-4>
+  <main class="px-4">
     <SectionContainer class="pt-16 md:pt-32 pb-2 p-6">
       <span class="bg-gray-800/70 rounded-lg shadow-lg flex flex-col p-12">
         <a href="/#proyectos" class="text-white hover:text-gray-300 pb-4">
@@ -32,7 +48,7 @@ const { title, title_l, description, date, imgs, tags, links } = Astro.props;
           {
             imgs.map((img) => (
               <li class="mb-2 w-1/2">
-                <img src={img} alt={title} class="w-full rounded-lg" />
+                <Image src={img} alt={`${title} - captura`} width={600} height={400} class="w-full rounded-lg" />
               </li>
             ))
           }

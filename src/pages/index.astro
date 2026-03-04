@@ -1,18 +1,18 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Eduacacion from "../components/Eduacacion.astro";
-import SectionContainer from "../components/SectionContainer.astro";
-import Hero from "../components/Hero.astro";
-import TitleSection from "../components/TitleSection.astro";
-import AboutMe from "../components/AboutMe.astro";
-import Habilities from "../components/Habilities.astro";
-import Proyectos from "../components/Projects.astro";
-import BooksIcons from "../icons/BooksIcons.astro";
-import ProfileIcon from "../icons/ProfileIcon.astro";
-import BrainIcon from "../icons/BrainIcon.astro";
-import CodeIcon from "../icons/CodeIcon.astro";
-import Experience from "../components/Experience.astro";
-import BriefcaseIcon from "../icons/BriefcaseIcon.astro";
+import Layout from "@layouts/Layout.astro";
+import Eduacacion from "@components/Eduacacion.astro";
+import SectionContainer from "@components/SectionContainer.astro";
+import Hero from "@components/Hero.astro";
+import TitleSection from "@components/TitleSection.astro";
+import AboutMe from "@components/AboutMe.astro";
+import Habilities from "@components/Habilities.astro";
+import Proyectos from "@components/Projects.astro";
+import BooksIcons from "@icons/BooksIcons.astro";
+import ProfileIcon from "@icons/ProfileIcon.astro";
+import BrainIcon from "@icons/BrainIcon.astro";
+import CodeIcon from "@icons/CodeIcon.astro";
+import Experience from "@components/Experience.astro";
+import BriefcaseIcon from "@icons/BriefcaseIcon.astro";
 ---
 
 <Layout>
@@ -34,19 +34,19 @@ import BriefcaseIcon from "../icons/BriefcaseIcon.astro";
       </TitleSection>
       <Experience />
     </SectionContainer>
-    <SectionContainer id="proyectos">
-      <TitleSection>
-        <CodeIcon class="size-7" />
-        Proyectos
-      </TitleSection>
-      <Proyectos />
-    </SectionContainer>
     <SectionContainer id="educacion" class="py-20">
       <TitleSection>
         <BooksIcons class="size-8" />
         Educación
       </TitleSection>
       <Eduacacion />
+    </SectionContainer>
+    <SectionContainer id="proyectos">
+      <TitleSection>
+        <CodeIcon class="size-7" />
+        Proyectos
+      </TitleSection>
+      <Proyectos />
     </SectionContainer>
     <SectionContainer id="habilidades" class="pt-20">
       <TitleSection>

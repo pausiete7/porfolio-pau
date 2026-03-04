@@ -1,3 +1,7 @@
+---
+import { Image } from "astro:assets";
+---
+
 <article
   class="flex flex-col items-center justify-center gap-8 text-gray-300 lg:flex-row"
 >
@@ -28,11 +32,11 @@
     </p>
   </div>
 
-  <img
-    width="200"
-    height="200"
+  <Image
     src="/pau.jpg"
-    alt="Pau Sevilla Photo"
+    alt="Pau Sevilla, desarrollador"
+    width={256}
+    height={256}
     class="order-1 object-cover w-64 h-full p-1 md:order-2 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-yellow-500/5 ring-1 ring-white/20"
     style="object-position: 50% 50%"
   />

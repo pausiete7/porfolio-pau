@@ -25,5 +25,9 @@ pnpm-debug.log*
 
 .agents/
 .agent/
+.cursor/
 
 skills-lock.json
+
+
+INFORME-ASTRO-REVISION.md

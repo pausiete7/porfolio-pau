@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   title: string;
   description: string;
@@ -11,7 +13,7 @@ const { title, description, date, link, image } = Astro.props;
 ---
 
 <div
-  class="relative mx-8 pb-12 grid gap-y-2 before:absolute before:left-[-19px] before:block before:h-full before:border-l-2 before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4]"
+  class="relative mx-8 pb-12 grid gap-y-2 before:absolute before:left-[-19px] before:block before:h-full before:border-l-2 before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4"
 >
   <div class="relative pb-12 md:col-span-2 p-4 bg-gray-800/70 rounded-lg">
     <div class="sticky top-0 flex flex-col items-center text-center gap-y-2">
@@ -26,9 +28,11 @@ const { title, description, date, link, image } = Astro.props;
         link && image && (
           <div class="flex flex-col items-center gap-y-2 mt-2">
             <div class="w-24 h-10 flex items-center justify-center">
-              <img
+              <Image
                 src={image}
-                alt="Company logo"
+                alt="Logo de la empresa"
+                width={96}
+                height={40}
                 class="max-w-full max-h-full object-contain rounded-lg"
               />
             </div>

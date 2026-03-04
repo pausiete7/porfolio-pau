@@ -1,18 +1,21 @@
 ---
-import Badge from "./Badge.astro";
-import SocialPill from "./SocialPill.astro";
-import LinkedinIcon from "../icons/LinkedinIcon.astro";
-import GitHubIcon from "../icons/GitHubIcon.astro";
-import InstagramIcon from "../icons/InstagramIcon.astro";
-import XIcon from "../icons/XIcon.astro";
-import MailIcon from "../icons/MailIcon.astro";
+import { Image } from "astro:assets";
+import Badge from "@components/Badge.astro";
+import SocialPill from "@components/SocialPill.astro";
+import LinkedinIcon from "@icons/LinkedinIcon.astro";
+import GitHubIcon from "@icons/GitHubIcon.astro";
+import InstagramIcon from "@icons/InstagramIcon.astro";
+import XIcon from "@icons/XIcon.astro";
+import MailIcon from "@icons/MailIcon.astro";
 ---
 
 <div class="flex gap-4 mb-4">
-  <img
-    class="rounded-full size-12 md:size-16 shadow-lg"
+  <Image
     src="/pau.jpg"
-    alt="Pau Sevilla photo"
+    alt="Pau Sevilla, desarrollador"
+    width={64}
+    height={64}
+    class="rounded-full size-12 md:size-16 shadow-lg"
   />
   <a
     href="https://www.linkedin.com/in/pau-sevilla"

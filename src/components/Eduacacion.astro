@@ -1,6 +1,7 @@
 ---
-import ExperienceItem from "./EduacionItem.astro";
-const Experience = [
+import EduacionItem from "./EduacionItem.astro";
+
+const EDUCATION = [
   {
     date: "Septiembre 2023 - Actualmente",
     title: "Grado de Ingeniería Informática (FIB - UPC)",
@@ -24,9 +25,9 @@ const Experience = [
 
 <ol class="relative mt-16">
   {
-    Experience.map((experience) => (
+    EDUCATION.map((item) => (
       <li>
-        <ExperienceItem {...experience} />
+        <EduacionItem {...item} />
       </li>
     ))
   }

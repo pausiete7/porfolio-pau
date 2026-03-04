@@ -1,17 +1,23 @@
 ---
-import Dart from "../icons/DartIcon.astro";
-import Flutter from "../icons/FlutterIcon.astro";
-import Supabase from "../icons/SupabaseIcon.astro";
-import LinkIcon from "../icons/LinkIcon.astro";
-import LinkButton from "./LinkButton.astro";
-import SQLite from "../icons/SQLiteIcon.astro";
-import GitHubIcon from "../icons/GitHubIcon.astro";
-import AstroIcon from "../icons/AstroIcon.astro";
-import HTML from "../icons/HtmlIcon.astro";
-import CSS from "../icons/CssIcon.astro";
-import Tailwind from "../icons/TailwindIcon.astro";
+import { Image } from "astro:assets";
+import { PROJECTS as PROJECTS_DATA } from "@data/projects";
+import type { ProjectTagId } from "@data/projects";
+import Dart from "@icons/DartIcon.astro";
+import Flutter from "@icons/FlutterIcon.astro";
+import Supabase from "@icons/SupabaseIcon.astro";
+import LinkIcon from "@icons/LinkIcon.astro";
+import LinkButton from "@components/LinkButton.astro";
+import SQLite from "@icons/SQLiteIcon.astro";
+import GitHubIcon from "@icons/GitHubIcon.astro";
+import AstroIcon from "@icons/AstroIcon.astro";
+import HTML from "@icons/HtmlIcon.astro";
+import CSS from "@icons/CssIcon.astro";
+import Tailwind from "@icons/TailwindIcon.astro";
 
-const TAGS = {
+const TAGS: Record<
+  ProjectTagId,
+  { name: string; class: string; icon: (props: { class?: string }) => unknown }
+> = {
   DART: {
     name: "Dart",
     class: "bg-[#0175C2] text-white",
@@ -54,47 +60,26 @@ const TAGS = {
   },
 };
 
-const PROJECTS = [
-  {
-    title: "Vademecum 2024",
-    description:
-      "Vademecum 2024 es una app de referencia médica que proporciona información actualizada sobre medicamentos, incluyendo indicaciones, dosis y efectos secundarios, dirigida a profesionales de la salud y usuarios interesados en conocer más sobre tratamientos farmacológicos.",
-    link: "/project/vademecum-2024",
-    image: "/vademecum.webp",
-    tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SQLITE],
-    slug: "vademecum-2024",
-  },
-     {
-    title: "Portfolio",
-    description:
-      "Un sitio web personal que muestra mi experiencia, proyectos y habilidades como programador. Desarrollado con Astro y Tailwind.",
-    link: "https://pausevilla.com/",
-    github: "https://github.com/pausiete7/porfolio-pau",
-    image: "/porfolio.webp",
-    tags: [TAGS.ASTRO, TAGS.TAILWIND],
-    slug: "portfolio",
-  },
-  {
-    title: "PickUpWatch",
-    description:
-      "PickUpWatch es un sistema de seguridad inteligente que utiliza reconocimiento facial para detectar la llegada de los padres a la escuela y notificar a los profesores. Esto garantiza que solo personas autorizadas puedan recoger a los niños, mejorando la seguridad durante las salidas.",
-    link: "/project/pickupwatch",
-    github: "https://github.com/pausiete7/pickUpWatch",
-    image: "/pickupwatch.webp",
-    tags: [TAGS.FLUTTER, TAGS.DART, TAGS.SUPABASE],
-    slug: "pickupwatch",
-  }
-];
+const PROJECTS = PROJECTS_DATA.map((p) => ({
+  title: p.title,
+  description: p.descriptionShort ?? p.description,
+  image: p.image,
+  link: p.link ?? `/project/${p.slug}`,
+  github: p.github,
+  tags: p.tagIds.map((id) => TAGS[id]),
+}));
 ---
 
 <div class="flex flex-col gap-y-16">
   {
     PROJECTS.map(({ title, description, tags, image, link, github }) => (
       <div class="border rounded-lg shadow lg:max-w-full  border-gray-700 bg-gray-800 flex flex-col gap-y-6 mx-auto lg:flex-row lg:gap-x-6 items-stretch">
-        <img
-          class="object-cover w-full rounded-t-lg md:rounded-none md:rounded-s-lg h-96  "
+        <Image
           src={image}
-          alt=""
+          alt={`Captura del proyecto ${title}`}
+          width={600}
+          height={384}
+          class="object-cover w-full rounded-t-lg md:rounded-none md:rounded-s-lg h-96"
         />
         <div class="flex flex-col justify-between p-4 leading-normal mb-5">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
@@ -121,7 +106,7 @@ const PROJECTS = [
               </LinkButton>
             )}
             {github && (
-              <LinkButton  href={github}, target="_blank">
+              <LinkButton href={github} target="_blank">
                 <GitHubIcon class="size-4" />
                 Github
               </LinkButton>
