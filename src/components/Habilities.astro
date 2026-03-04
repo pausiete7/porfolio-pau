@@ -46,14 +46,14 @@ const BLOCS: { title: string; tags: TagDefinition[] }[] = [
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
   {
     BLOCS.map(({ title, tags }) => (
-      <section class="flex flex-col items-center bg-gray-800/70 rounded-lg  shadow-lg p-6 h-full border border-blue-500">
+      <section class="flex flex-col items-center bg-gray-800/60 rounded-xl shadow-lg p-6 h-full border border-blue-500/40 hover:border-blue-500/70 transition-all duration-300 backdrop-blur-sm">
         <h2 class="text-xl font-bold text-blue-500 pb-4 ">{title}</h2>
         <ul class="grid grid-cols-2 lg:grid-cols-3 gap-5 w-full">
           {tags.map((tag) => (
             <li
-              class={`flex flex-col gap-y-2 rounded-lg items-center justify-between text-sm shadow-2xl bg-gray-800 p-4 border border-blue-500  transition hover:scale-105`}
+              class={`group flex flex-col gap-y-2 rounded-lg items-center justify-between text-sm shadow-md bg-gray-800/80 hover:bg-gray-800 p-4 border border-white/10 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105`}
             >
-              <tag.icon class="size-9" />
+              <tag.icon class="size-9 transition-transform duration-300 group-hover:scale-110" />
               <h3 class="text-xs text-white/80">{tag.name}</h3>
             </li>
           ))}

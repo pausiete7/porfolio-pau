@@ -40,6 +40,27 @@ const t = useTranslations(lang);
     <Header lang={lang} />
     <slot />
     <Footer lang={lang} />
+
+    <script>
+      function setupReveal() {
+        const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+              }
+            });
+          },
+          { root: null, rootMargin: '0px', threshold: 0.1 }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+      }
+
+      document.addEventListener('astro:page-load', () => {
+        setupReveal();
+      });
+    </script>
   </body>
 </html>
 <style is:global>
@@ -69,9 +90,38 @@ const t = useTranslations(lang);
     background-attachment: fixed !important;
   }
 
+  /* Scroll reveal animations */
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .reveal { transform: translateY(24px); }
+  .reveal-left { transform: translateX(-24px); }
+  .reveal-right { transform: translateX(24px); }
+  .reveal-scale { transform: scale(0.92); }
+
+  .reveal.in-view,
+  .reveal-left.in-view,
+  .reveal-right.in-view,
+  .reveal-scale.in-view {
+    opacity: 1;
+    transform: translate(0) scale(1);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 </style>

@@ -24,35 +24,35 @@ const t = useTranslations(lang);
     <SectionContainer class="pt-16 md:pt-32 pb-20">
       <Hero lang={lang} />
     </SectionContainer>
-    <SectionContainer id="sobre-mi">
+    <SectionContainer id="sobre-mi" class="reveal">
       <TitleSection>
         <ProfileIcon class="size-8" />
         {t("section.about")}
       </TitleSection>
       <AboutMe lang={lang} />
     </SectionContainer>
-    <SectionContainer id="experiencia" class="py-20">
+    <SectionContainer id="experiencia" class="py-20 reveal">
       <TitleSection>
         <BriefcaseIcon class="size-8" />
         {t("section.experience")}
       </TitleSection>
       <Experience lang={lang} />
     </SectionContainer>
-    <SectionContainer id="educacion" class="py-20">
+    <SectionContainer id="educacion" class="py-20 reveal">
       <TitleSection>
         <BooksIcon class="size-8" />
         {t("section.education")}
       </TitleSection>
       <Educacion lang={lang} />
     </SectionContainer>
-    <SectionContainer id="proyectos">
+    <SectionContainer id="proyectos" class="reveal">
       <TitleSection>
         <CodeIcon class="size-7" />
         {t("section.projects")}
       </TitleSection>
       <Proyectos lang={lang} />
     </SectionContainer>
-    <SectionContainer id="habilidades" class="pt-20">
+    <SectionContainer id="habilidades" class="pt-20 reveal">
       <TitleSection>
         <BrainIcon class="size-8" />
         {t("section.skills")}

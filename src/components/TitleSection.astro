@@ -6,11 +6,10 @@ interface Props {
 const { className } = Astro.props;
 ---
 
-<h2
-  class:list={[
-    "flex items-center mb-6 text-3xl font-semibold gap-x-3 text-white",
-    className,
-  ]}
->
-  <slot />
-</h2>
+<div class:list={["flex items-center gap-x-4 mb-8", className]}>
+  <div class="h-px flex-1 bg-gradient-to-r from-blue-500/30 to-transparent"></div>
+  <h2 class="flex items-center text-3xl font-semibold gap-x-3 text-white shrink-0">
+    <slot />
+  </h2>
+  <div class="h-px flex-1 bg-gradient-to-l from-blue-500/30 to-transparent"></div>
+</div>

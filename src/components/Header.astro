@@ -1,5 +1,10 @@
 ---
 import LanguageSwitcher from "@components/LanguageSwitcher.astro";
+import ProfileIcon from "@icons/ProfileIcon.astro";
+import BriefcaseIcon from "@icons/BriefcaseIcon.astro";
+import BooksIcon from "@icons/BooksIcon.astro";
+import CodeIcon from "@icons/CodeIcon.astro";
+import BrainIcon from "@icons/BrainIcon.astro";
 import { useTranslations, DEFAULT_LANG, type Lang } from "@/i18n";
 
 interface Props {
@@ -15,26 +20,31 @@ const NAV_ITEMS = [
     title: t("nav.about"),
     label: "sobre-mi",
     url: `${prefix}/#sobre-mi`,
+    icon: ProfileIcon,
   },
   {
     title: t("nav.experience"),
     label: "experiencia",
     url: `${prefix}/#experiencia`,
+    icon: BriefcaseIcon,
   },
   {
     title: t("nav.education"),
     label: "educacion",
     url: `${prefix}/#educacion`,
+    icon: BooksIcon,
   },
   {
     title: t("nav.projects"),
     label: "proyectos",
     url: `${prefix}/#proyectos`,
+    icon: CodeIcon,
   },
   {
     title: t("nav.skills"),
     label: "habilidades",
     url: `${prefix}/#habilidades`,
+    icon: BrainIcon,
   },
 ];
 ---
@@ -42,25 +52,25 @@ const NAV_ITEMS = [
 <header
   class="fixed top-0 z-10 w-full mt-2"
 >
-  <div class="max-w-xl md:max-w-xl lg:max-w-4xl mx-auto px-4 relative flex items-center justify-center">
+  <div class="max-w-xl md:max-w-xl lg:max-w-4xl mx-auto px-2 md:px-4 flex items-center justify-center gap-2">
     <nav
-      class="flex px-3 text-sm md:text-base font-medium rounded-full text-gray-200 justify-center items-center"
+      class="flex px-2 md:px-3 text-sm md:text-base font-medium rounded-full text-gray-200 justify-center items-center"
     >
       {
         NAV_ITEMS.map((link) => (
           <a
-            class="relative block px-2 py-2 transition hover:text-blue-500"
+            class="relative flex items-center justify-center px-2.5 py-2 md:px-2 transition hover:text-blue-500 whitespace-nowrap after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:w-0 after:bg-blue-500 after:rounded-full after:transition-all after:duration-300 hover:after:w-full"
             aria-label={link.label}
             href={link.url}
+            title={link.title}
           >
-            {link.title}
+            <link.icon class="size-5 md:hidden" />
+            <span class="hidden md:inline">{link.title}</span>
           </a>
         ))
       }
     </nav>
-    <div class="absolute right-4">
-      <LanguageSwitcher lang={lang} />
-    </div>
+    <LanguageSwitcher lang={lang} />
   </div>
 </header>
 
