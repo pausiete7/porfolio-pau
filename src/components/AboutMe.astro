@@ -1,5 +1,13 @@
 ---
 import { Image } from "astro:assets";
+import { useTranslations, type Lang } from "@/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <article
@@ -8,33 +16,14 @@ import { Image } from "astro:assets";
   <div
     class="[&>p]:mb-4 [&>p>strong]:text-blue-500 text-pretty order-2 md:order-1 text-justify"
   >
-    <p>
-      Soy Pau Sevilla, estudiante de
-      <strong>Ingeniería Informática en la FIB - UPC</strong>, en Barcelona.
-      Desde los 14 años, la programación ha sido mi pasión y he dedicado gran
-      parte de mi tiempo a aprender y perfeccionar mis habilidades en este
-      campo.
-    </p>
-
-    <p>
-      Me considero una persona curiosa y orientada a los retos. He trabajado con
-      <strong>diversos lenguajes y tecnologías</strong>, incluyendo proyectos
-      relacionados con <strong>inteligencia artificial</strong>, siempre
-      buscando nuevas formas de aplicar mis conocimientos y mejorar mis
-      capacidades.
-    </p>
-
-    <p>
-      Vivo en Barcelona, una ciudad que impulsa mi curiosidad por la <strong
-        >innovación y la tecnología</strong
-      >. Mi objetivo es seguir creciendo profesionalmente y contribuir a
-      proyectos que generen un impacto positivo en la sociedad.
-    </p>
+    <p set:html={t("about.p1")} />
+    <p set:html={t("about.p2")} />
+    <p set:html={t("about.p3")} />
   </div>
 
   <Image
     src="/pau.jpg"
-    alt="Pau Sevilla, desarrollador"
+    alt={t("about.photoAlt")}
     width={256}
     height={256}
     class="order-1 object-cover w-64 h-full p-1 md:order-2 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-yellow-500/5 ring-1 ring-white/20"

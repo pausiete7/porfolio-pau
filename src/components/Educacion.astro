@@ -1,0 +1,39 @@
+---
+import EduacionItem from "./EduacionItem.astro";
+import { useTranslations, type Lang } from "@/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const EDUCATION = [
+  {
+    date: t("education.0.date"),
+    title: t("education.0.title"),
+    description: t("education.0.description"),
+  },
+  {
+    date: t("education.1.date"),
+    title: t("education.1.title"),
+    description: t("education.1.description"),
+  },
+  {
+    date: t("education.2.date"),
+    title: t("education.2.title"),
+    description: t("education.2.description"),
+  },
+];
+---
+
+<ol class="relative mt-16">
+  {
+    EDUCATION.map((item) => (
+      <li>
+        <EduacionItem {...item} />
+      </li>
+    ))
+  }
+</ol>

@@ -1,4 +1,12 @@
 ---
+import { useTranslations, type Lang } from "@/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
 ---
 
@@ -10,8 +18,7 @@ const currentYear = new Date().getFullYear();
   >
     <span class="text-sm sm:text-center text-white/90"
       >© {currentYear}
-      <a href="/" class="hover:underline">pausevilla.com</a>. Todos los derechos
-      reservados
+      <a href="/" class="hover:underline">pausevilla.com</a>. {t("footer.rights")}
     </span>
     <ul
       class="flex flex-wrap items-center gap-x-4 mt-3 text-sm font-medium text-white/90 sm:mt-0"
@@ -20,7 +27,7 @@ const currentYear = new Date().getFullYear();
         <a
           id="contacto"
           href="mailto:pau.sevilla@icloud.com"
-          class="hover:underline">Contacto</a
+          class="hover:underline">{t("footer.contact")}</a
         >
       </li>
     </ul>

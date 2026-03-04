@@ -13,9 +13,9 @@ import BrainIcon from "@icons/BrainIcon.astro";
 import CodeIcon from "@icons/CodeIcon.astro";
 import Experience from "@components/Experience.astro";
 import BriefcaseIcon from "@icons/BriefcaseIcon.astro";
-import { useTranslations, DEFAULT_LANG, type Lang } from "@/i18n";
+import { useTranslations } from "@/i18n";
 
-const lang = (Astro.currentLocale ?? DEFAULT_LANG) as Lang;
+const lang = "es" as const;
 const t = useTranslations(lang);
 ---
 

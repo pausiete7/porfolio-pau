@@ -10,6 +10,13 @@ const root = fileURLToPath(new URL("./src/", import.meta.url));
 export default defineConfig({
   integrations: [tailwind()],
   site: "https://pausevilla.com",
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es", "ca"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   vite: {
     resolve: {
       alias: {

@@ -1,11 +1,19 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro";
+import { useTranslations, type Lang } from "@/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
 const EXPERIENCE = [
   {
-    date: "Diciembre 2024 - Presente",
-    title: "Programador web full-stack y computación - InLab FIB",
-    description:
-      "El inLab FIB es el laboratorio de innovación e investigación de la Facultad de Informática de Barcelona (UPC), donde se desarrollan proyectos R+D+I multidisciplinares en el ámbito TIC. He participado en proyectos muy diversos: desde desarrollo full-stack hasta iniciativas de computación. Colaboro en equipo con metodologías ágiles, implementando backend y frontend en proyectos que transfieren conocimiento e innovación al sector.",
+    date: t("experience.0.date"),
+    title: t("experience.0.title"),
+    description: t("experience.0.description"),
     link: "https://inlab.fib.upc.edu/",
     image: "/inlab-fib.webp",
   },
@@ -16,7 +24,7 @@ const EXPERIENCE = [
   {
     EXPERIENCE.map((experience) => (
       <li>
-        <ExperienceItem {...experience} />
+        <ExperienceItem {...experience} lang={lang} />
       </li>
     ))
   }

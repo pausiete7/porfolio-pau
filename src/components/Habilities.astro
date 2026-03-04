@@ -1,169 +1,44 @@
 ---
-import Dart from "@icons/DartIcon.astro";
-import Flutter from "@icons/FlutterIcon.astro";
-import Supabase from "@icons/SupabaseIcon.astro";
-import React from "@icons/ReactIcon.astro";
-import Postgre from "@icons/PostgreIcon.astro";
-import Js from "@icons/JavaScriptIcon.astro";
-import Python from "@icons/PythonIcon.astro";
-import C from "@icons/CIcon.astro";
-import Astr from "@icons/AstroIcon.astro";
-import Html from "@icons/HtmlIcon.astro";
-import Css from "@icons/CssIcon.astro";
-import Tailwind from "@icons/TailwindIcon.astro";
-import Figma from "@icons/FigmaIcon.astro";
-import Vs from "@icons/VSIcon.astro";
-import Git from "@icons/GitIcon.astro";
-import Github from "@icons/GitHubIcon.astro";
-import DigitalOcean from "@icons/DigitalOceanIcon.astro";
-import Postman from "@icons/PostManIcon.astro";
-import SQLite from "@icons/SQLiteIcon.astro";
-import Angular from "@icons/AngularIcon.astro";
-import Laravel from "@icons/Laravelcon.astro";
-import TypeScript from "@icons/TypeScript.astro";
-const TAGS = {
-  DART: {
-    name: "Dart",
-    class: "bg-[#0175C2] text-white",
-    icon: Dart,
-  },
-  FLUTTER: {
-    name: "Flutter",
-    class: "bg-[#02569B] text-white",
-    icon: Flutter,
-  },
-  SUPABASE: {
-    name: "Supabase",
-    class: "bg-[#333333] text-white",
-    icon: Supabase,
-  },
-  REACT: {
-    name: "React",
-    class: "bg-[#61DAFB] text-white",
-    icon: React,
-  },
-  POSTGRE: {
-    name: "PostgreSQL",
-    class: "bg-[#336791] text-white",
-    icon: Postgre,
-  },
-  JS: {
-    name: "JavaScript",
-    class: "bg-[#F7DF1E] text-black",
-    icon: Js,
-  },
-  PYTHON: {
-    name: "Python",
-    class: "bg-[#3776AB] text-white",
-    icon: Python,
-  },
-  C: {
-    name: "C++",
-    class: "bg-[#A8B9CC] text-white",
-    icon: C,
-  },
-  ASTRO: {
-    name: "Astro",
-    class: "bg-[#000000] text-white",
-    icon: Astr,
-  },
-  HTML: {
-    name: "HTML",
-    class: "bg-[#E34F26] text-white",
-    icon: Html,
-  },
-  CSS: {
-    name: "CSS",
-    class: "bg-[#0C73B8] text-white",
-    icon: Css,
-  },
-  TAILWIND: {
-    name: "Tailwind",
-    class: "bg-[#38B2AC] text-white",
-    icon: Tailwind,
-  },
-  FIGMA: {
-    name: "Figma",
-    class: "bg-[#F24E1E] text-white",
-    icon: Figma,
-  },
-  VS: {
-    name: "VSCode",
-    class: "bg-[#007ACC] text-white",
-    icon: Vs,
-  },
-  GIT: {
-    name: "Git",
-    class: "bg-[#3E2C00] text-white",
-    icon: Git,
-  },
-  GITHUB: {
-    name: "GitHub",
-    class: "bg-[#181717] text-white",
-    icon: Github,
-  },
-  DIGITALOCEAN: {
-    name: "DigitalOcean",
-    class: "bg-[#0080FF] text-white",
-    icon: DigitalOcean,
-  },
-  POSTMAN: {
-    name: "Postman",
-    class: "bg-[#FF6C37] text-white",
-    icon: Postman,
-  },
-  SQLITE: {
-    name: "SQLite",
-    class: "bg-white/80 text-white",
-    icon: SQLite,
-  },
-  ANGULAR: {
-    name: "Angular",
-    class: "bg-[#DD0031] text-white",
-    icon: Angular,
-  },
-  LARAVEL: {
-    name: "Laravel",
-    class: "bg-[#FF2D20] text-white",
-    icon: Laravel,
-  },
-  TYPESCRIPT: {
-    name: "TypeScript",
-    class: "bg-[#007ACC] text-white",
-    icon: TypeScript,
-  },
-};
+import { SKILL_TAGS, type TagDefinition } from "@data/tags";
+import { useTranslations, type Lang } from "@/i18n";
 
-const BLOCS = [
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const BLOCS: { title: string; tags: TagDefinition[] }[] = [
   {
-    title: "FRONTEND",
+    title: t("skills.frontend"),
     tags: [
-      TAGS.FLUTTER,
-      TAGS.REACT,
-      TAGS.ASTRO,
-      TAGS.HTML,
-      TAGS.CSS,
-      TAGS.TAILWIND,
-      TAGS.ANGULAR,
+      SKILL_TAGS.FLUTTER,
+      SKILL_TAGS.REACT,
+      SKILL_TAGS.ASTRO,
+      SKILL_TAGS.HTML,
+      SKILL_TAGS.CSS,
+      SKILL_TAGS.TAILWIND,
+      SKILL_TAGS.ANGULAR,
     ],
   },
   {
-    title: "BACKEND",
+    title: t("skills.backend"),
     tags: [
-      TAGS.SUPABASE,
-      TAGS.POSTGRE,
-      TAGS.DIGITALOCEAN,
-      TAGS.SQLITE,
-      TAGS.LARAVEL,
+      SKILL_TAGS.SUPABASE,
+      SKILL_TAGS.POSTGRE,
+      SKILL_TAGS.DIGITALOCEAN,
+      SKILL_TAGS.SQLITE,
+      SKILL_TAGS.LARAVEL,
     ],
   },
   {
-    title: "LENGUAJES DE PROGRAMACIÓN",
-    tags: [TAGS.DART, TAGS.JS, TAGS.PYTHON, TAGS.C, TAGS.TYPESCRIPT],
+    title: t("skills.languages"),
+    tags: [SKILL_TAGS.DART, SKILL_TAGS.JS, SKILL_TAGS.PYTHON, SKILL_TAGS.C, SKILL_TAGS.TYPESCRIPT],
   },
   {
-    title: "HERRAMIENTAS",
-    tags: [TAGS.FIGMA, TAGS.VS, TAGS.GIT, TAGS.GITHUB, TAGS.POSTMAN],
+    title: t("skills.tools"),
+    tags: [SKILL_TAGS.FIGMA, SKILL_TAGS.VS, SKILL_TAGS.GIT, SKILL_TAGS.GITHUB, SKILL_TAGS.POSTMAN],
   },
 ];
 ---

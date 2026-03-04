@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import LinkButton from "@components/LinkButton.astro";
 import SectionContainer from "@components/SectionContainer.astro";
+import { useTranslations, DEFAULT_LANG, type Lang } from "@/i18n";
 
 /** Componente Astro que acepta prop class (iconos) */
 type IconComponent = (props: { class?: string }) => unknown;
@@ -28,17 +29,20 @@ interface Props {
   imgs: string[];
   tags: ProjectTag[];
   links: ProjectLink[];
+  lang: Lang;
 }
 
-const { title, title_l, description, date, imgs, tags, links } = Astro.props;
+const { title, title_l, description, date, imgs, tags, links, lang } = Astro.props;
+const t = useTranslations(lang);
+const prefix = lang === DEFAULT_LANG ? "" : `/${lang}`;
 ---
 
-<Layout>
+<Layout lang={lang}>
   <main class="px-4">
     <SectionContainer class="pt-16 md:pt-32 pb-2 p-6">
       <span class="bg-gray-800/70 rounded-lg shadow-lg flex flex-col p-12">
-        <a href="/#proyectos" class="text-white hover:text-gray-300 pb-4">
-          ← Volver a la lista de proyectos
+        <a href={`${prefix}/#proyectos`} class="text-white hover:text-gray-300 pb-4">
+          &larr; {t("projectDetail.backToList")}
         </a>
         <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-200">
           {title_l}
@@ -48,19 +52,19 @@ const { title, title_l, description, date, imgs, tags, links } = Astro.props;
           {
             imgs.map((img) => (
               <li class="mb-2 w-1/2">
-                <Image src={img} alt={`${title} - captura`} width={600} height={400} class="w-full rounded-lg" />
+                <Image src={img} alt={`${title} - ${t("projectDetail.screenshotAlt")}`} width={600} height={400} class="w-full rounded-lg" />
               </li>
             ))
           }
         </ul>
         <h2 class="text-lg lg:text-xl font-semibold text-gray-200 pb-4">
-          Descripción de {title}
+          {t("projectDetail.descriptionOf")} {title}
         </h2>
         <p class="text-base lg:text-lg text-gray-300 text-justify pb-3">
           {description}
         </p>
         <h2 class="text-lg lg:text-xl font-semibold text-gray-200 pb-4">
-          Tecnologías utilizadas
+          {t("projectDetail.technologies")}
         </h2>
         <ul class="flex flex-row gap-4 pb-4">
           {

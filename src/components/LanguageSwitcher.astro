@@ -1,0 +1,44 @@
+---
+import { LANGUAGES, DEFAULT_LANG, type Lang } from "@/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const langs = Object.keys(LANGUAGES) as Lang[];
+const activeIndex = langs.indexOf(lang);
+
+const pathname = Astro.url.pathname;
+const pathWithoutLocale = pathname.replace(/^\/(es|ca)(\/|$)/, "/");
+
+function getLocalePath(targetLang: Lang): string {
+  if (targetLang === DEFAULT_LANG) return pathWithoutLocale;
+  return `/${targetLang}${pathWithoutLocale === "/" ? "/" : pathWithoutLocale}`;
+}
+---
+
+<div
+  class="lang-switcher relative flex items-center rounded-full bg-gray-800/90"
+  transition:name="lang-switcher"
+  transition:animate="none"
+>
+  <span
+    class="absolute rounded-full bg-blue-500"
+    transition:name="lang-slider"
+    style={`width:2rem;height:1.75rem;left:${activeIndex * 2}rem`}
+  />
+  {
+    langs.map((code) => (
+      <a
+        href={getLocalePath(code)}
+        class:list={[
+          "relative z-10 w-8 h-7 flex items-center justify-center text-xs font-semibold uppercase transition-colors duration-200",
+          code === lang ? "text-white" : "text-gray-400 hover:text-gray-200",
+        ]}
+      >
+        {code}
+      </a>
+    ))
+  }
+</div>

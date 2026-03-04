@@ -1,73 +1,36 @@
 ---
 import { Image } from "astro:assets";
 import { PROJECTS as PROJECTS_DATA } from "@data/projects";
-import type { ProjectTagId } from "@data/projects";
-import Dart from "@icons/DartIcon.astro";
-import Flutter from "@icons/FlutterIcon.astro";
-import Supabase from "@icons/SupabaseIcon.astro";
+import { PROJECT_TAGS } from "@data/tags";
 import LinkIcon from "@icons/LinkIcon.astro";
 import LinkButton from "@components/LinkButton.astro";
-import SQLite from "@icons/SQLiteIcon.astro";
 import GitHubIcon from "@icons/GitHubIcon.astro";
-import AstroIcon from "@icons/AstroIcon.astro";
-import HTML from "@icons/HtmlIcon.astro";
-import CSS from "@icons/CssIcon.astro";
-import Tailwind from "@icons/TailwindIcon.astro";
+import { useTranslations, DEFAULT_LANG, type Lang } from "@/i18n";
 
-const TAGS: Record<
-  ProjectTagId,
-  { name: string; class: string; icon: (props: { class?: string }) => unknown }
-> = {
-  DART: {
-    name: "Dart",
-    class: "bg-[#0175C2] text-white",
-    icon: Dart,
-  },
-  FLUTTER: {
-    name: "Flutter",
-    class: "bg-[#02569B] text-white",
-    icon: Flutter,
-  },
-  SUPABASE: {
-    name: "Supabase",
-    class: "bg-[#333333] text-white",
-    icon: Supabase,
-  },
-  SQLITE: {
-    name: "SQLite",
-    class: "bg-gray-500/80 text-white",
-    icon: SQLite,
-  },
-  ASTRO: {
-    name: "Astro",
-    class: "bg-[#000000] text-white",
-    icon: AstroIcon,
-  },
-  HTML: {
-    name: "HTML",
-    class: "bg-[#000000] text-white",
-    icon: HTML,
-  },
-  CSS: {
-    name: "CSS",
-    class: "bg-[#000000] text-white",
-    icon: CSS,
-  },
-  TAILWIND: {
-    name: "Tailwind",
-    class: "bg-[#000000] text-white",
-    icon: Tailwind,
-  },
-};
+interface Props {
+  lang: Lang;
+}
 
-const PROJECTS = PROJECTS_DATA.map((p) => ({
-  title: p.title,
-  description: p.descriptionShort ?? p.description,
-  image: p.image,
-  link: p.link ?? `/project/${p.slug}`,
-  github: p.github,
-  tags: p.tagIds.map((id) => TAGS[id]),
-}));
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const prefix = lang === DEFAULT_LANG ? "" : `/${lang}`;
+
+const PROJECTS = PROJECTS_DATA.map((p) => {
+  const text = p.text[lang];
+  // For project detail links, add locale prefix
+  const rawLink = p.link ?? `/project/${p.slug}`;
+  const localizedLink = rawLink.startsWith("/project/")
+    ? `${prefix}${rawLink}`
+    : rawLink;
+  return {
+    title: text.title,
+    description: text.descriptionShort ?? text.description,
+    image: p.image,
+    link: localizedLink,
+    github: p.github,
+    tags: p.tagIds.map((id) => PROJECT_TAGS[id]),
+  };
+});
 ---
 
 <div class="flex flex-col gap-y-16">
@@ -76,7 +39,7 @@ const PROJECTS = PROJECTS_DATA.map((p) => ({
       <div class="border rounded-lg shadow lg:max-w-full  border-gray-700 bg-gray-800 flex flex-col gap-y-6 mx-auto lg:flex-row lg:gap-x-6 items-stretch">
         <Image
           src={image}
-          alt={`Captura del proyecto ${title}`}
+          alt={`${t("projects.screenshotAlt")} ${title}`}
           width={600}
           height={384}
           class="object-cover w-full rounded-t-lg md:rounded-none md:rounded-s-lg h-96"
@@ -102,7 +65,7 @@ const PROJECTS = PROJECTS_DATA.map((p) => ({
             {link && (
               <LinkButton href={link}>
                 <LinkIcon class="size-4" />
-                Ver más
+                {t("projects.viewMore")}
               </LinkButton>
             )}
             {github && (

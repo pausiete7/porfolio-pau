@@ -1,9 +1,8 @@
 ---
 import { buildProjectForDetail, getProjectsWithDetail } from "@data/project-detail";
 import ProjectDetail from "@components/ProjectDetail.astro";
-import { DEFAULT_LANG, type Lang } from "@/i18n";
 
-const lang = (Astro.currentLocale ?? DEFAULT_LANG) as Lang;
+const lang = "ca" as const;
 
 export function getStaticPaths() {
   return getProjectsWithDetail().map((p) => ({

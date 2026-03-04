@@ -7,12 +7,20 @@ import GitHubIcon from "@icons/GitHubIcon.astro";
 import InstagramIcon from "@icons/InstagramIcon.astro";
 import XIcon from "@icons/XIcon.astro";
 import MailIcon from "@icons/MailIcon.astro";
+import { useTranslations, type Lang } from "@/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <div class="flex gap-4 mb-4">
   <Image
     src="/pau.jpg"
-    alt="Pau Sevilla, desarrollador"
+    alt={t("hero.photoAlt")}
     width={64}
     height={64}
     class="rounded-full size-12 md:size-16 shadow-lg"
@@ -23,25 +31,16 @@ import MailIcon from "@icons/MailIcon.astro";
     rel="noopener"
     class="flex items-center transition md:justify-center md:hover:scale-105"
   >
-    <Badge>Disponible para trabajar</Badge>
+    <Badge>{t("hero.badge")}</Badge>
   </a>
 </div>
 <h1 class="text-4xl font-bold tracking-tight sm:text-5xl text-white">
-  Hey! Soy Pau Sevilla
+  {t("hero.greeting")}
 </h1>
 <p
   class="text-lg lg:text-xl opacity-80 text-wrap mt-6 text-justify text-white/90"
->
-  Soy estudiante de Ingeniería Informática en la FIB (UPC de Barcelona).
-  Apasionado por la <span class="font-bold text-blue-500"
-    >tecnología y el desarrollo de software</span
-  >, siempre estoy buscando nuevas formas de aprender y crecer en el mundo de la
-  informática. Vivo en Barcelona, España y disfruto de enfrentarme a nuevos
-  retos, con el objetivo de transformar ideas en soluciones innovadoras.
-  <span class="font-bold text-blue-500">
-    ¡Bienvenido a mi espacio personal!</span
-  >
-</p>
+  set:html={t("hero.bio")}
+/>
 <nav class="flex gap-4 mt-8 flex-wrap">
   <SocialPill target="_blank" href="https://www.linkedin.com/in/pau-sevilla">
     <LinkedinIcon class="size-5 md:size-6" />

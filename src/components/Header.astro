@@ -1,79 +1,122 @@
 ---
+import LanguageSwitcher from "@components/LanguageSwitcher.astro";
+import { useTranslations, DEFAULT_LANG, type Lang } from "@/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const prefix = lang === DEFAULT_LANG ? "" : `/${lang}`;
+
 const NAV_ITEMS = [
   {
-    title: "Sobre mi",
+    title: t("nav.about"),
     label: "sobre-mi",
-    url: "/#sobre-mi",
+    url: `${prefix}/#sobre-mi`,
   },
   {
-    title: "Experiencia Laboral",
+    title: t("nav.experience"),
     label: "experiencia",
-    url: "/#experiencia",
+    url: `${prefix}/#experiencia`,
   },
   {
-    title: "Educación",
+    title: t("nav.education"),
     label: "educacion",
-    url: "/#educacion",
+    url: `${prefix}/#educacion`,
   },
   {
-    title: "Proyectos",
+    title: t("nav.projects"),
     label: "proyectos",
-    url: "/#proyectos",
+    url: `${prefix}/#proyectos`,
   },
   {
-    title: "Habilidades",
+    title: t("nav.skills"),
     label: "habilidades",
-    url: "/#habilidades",
+    url: `${prefix}/#habilidades`,
   },
 ];
 ---
 
 <header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
+  class="fixed top-0 z-10 w-full mt-2"
 >
-  <nav
-    class="flex px-3 text-sm md:text-base font-medium rounded-full text-gray-200 justify-center items-center"
-  >
-    {
-      NAV_ITEMS.map((link) => (
-        <a
-          class="relative block px-2 py-2 transition hover:text-blue-500"
-          aria-label={link.label}
-          href={link.url}
-        >
-          {link.title}
-        </a>
-      ))
-    }
-  </nav>
+  <div class="max-w-xl md:max-w-xl lg:max-w-4xl mx-auto px-4 relative flex items-center justify-center">
+    <nav
+      class="flex px-3 text-sm md:text-base font-medium rounded-full text-gray-200 justify-center items-center"
+    >
+      {
+        NAV_ITEMS.map((link) => (
+          <a
+            class="relative block px-2 py-2 transition hover:text-blue-500"
+            aria-label={link.label}
+            href={link.url}
+          >
+            {link.title}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="absolute right-4">
+      <LanguageSwitcher lang={lang} />
+    </div>
+  </div>
 </header>
 
 <script>
   function setupNavHighlight() {
-    const sections = document.querySelectorAll("section");
-    const navItems = document.querySelectorAll("header nav a");
+    const sections = document.querySelectorAll("section[id]");
+    const navItems = document.querySelectorAll("header nav a[aria-label]");
+    const visibleSections = new Set<string>();
 
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") === entry.target.id) {
-              item.classList.add("text-blue-500");
-            } else {
-              item.classList.remove("text-blue-500");
-            }
-          });
+    function updateActive() {
+      // Find the section closest to the top of the viewport among visible ones
+      let activeId = "";
+      let minTop = Infinity;
+      visibleSections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = Math.abs(el.getBoundingClientRect().top);
+          if (top < minTop) {
+            minTop = top;
+            activeId = id;
+          }
         }
       });
-    };
+      // If scrolled to bottom, activate last section
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+        const allIds = Array.from(sections).map((s) => s.id).filter(Boolean);
+        activeId = allIds[allIds.length - 1] || activeId;
+      }
+      navItems.forEach((item) => {
+        if (item.getAttribute("aria-label") === activeId) {
+          item.classList.add("text-blue-500");
+        } else {
+          item.classList.remove("text-blue-500");
+        }
+      });
+    }
 
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id) {
+            if (entry.isIntersecting) {
+              visibleSections.add(entry.target.id);
+            } else {
+              visibleSections.delete(entry.target.id);
+            }
+          }
+        });
+        updateActive();
+      },
+      { root: null, rootMargin: "0px", threshold: 0.1 },
+    );
 
     sections.forEach((section) => observer.observe(section));
+
+    window.addEventListener("scroll", updateActive, { passive: true });
 
     document.onvisibilitychange = () => {
       if (document.visibilityState === "hidden") {
