@@ -52,25 +52,28 @@ const NAV_ITEMS = [
 <header
   class="fixed top-0 z-10 w-full mt-2"
 >
-  <div class="max-w-xl md:max-w-xl lg:max-w-4xl mx-auto px-2 md:px-4 flex items-center justify-center gap-2">
+  <div class="max-w-xl lg:max-w-4xl mx-auto px-2 md:px-4 flex items-center justify-between">
+    <div class="w-24 shrink-0 hidden lg:block" aria-hidden="true" />
     <nav
-      class="flex px-2 md:px-3 text-sm md:text-base font-medium rounded-full text-gray-200 justify-center items-center"
+      class="flex px-2 lg:px-3 text-sm lg:text-base font-medium rounded-full text-gray-200 justify-center items-center"
     >
       {
         NAV_ITEMS.map((link) => (
           <a
-            class="relative flex items-center justify-center px-2.5 py-2 md:px-2 transition hover:text-blue-500 whitespace-nowrap after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:w-0 after:bg-blue-500 after:rounded-full after:transition-all after:duration-300 hover:after:w-full"
+            class="relative flex items-center justify-center px-2.5 py-2 lg:px-2 transition hover:text-blue-500 whitespace-nowrap after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:w-0 after:bg-blue-500 after:rounded-full after:transition-all after:duration-300 hover:after:w-full"
             aria-label={link.label}
             href={link.url}
             title={link.title}
           >
-            <link.icon class="size-5 md:hidden" />
-            <span class="hidden md:inline">{link.title}</span>
+            <link.icon class="size-5 lg:hidden" />
+            <span class="hidden lg:inline">{link.title}</span>
           </a>
         ))
       }
     </nav>
-    <LanguageSwitcher lang={lang} />
+    <div class="w-24 shrink-0 flex justify-end">
+      <LanguageSwitcher lang={lang} />
+    </div>
   </div>
 </header>
 
