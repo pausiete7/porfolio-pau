@@ -39,6 +39,12 @@ const orgBlurb = {
   ca: "Laboratori d'innovació i recerca de la Facultat d'Informàtica de Barcelona.",
 }[lang];
 const pad = (n: number) => String(n).padStart(2, "0");
+// CV público (sin teléfono). En catalán se ofrece el de castellano.
+const cv = {
+  es: { href: "/cv/Pau-Sevilla-CV-ES.pdf", label: "Descargar CV (PDF)" },
+  en: { href: "/cv/Pau-Sevilla-CV-EN.pdf", label: "Download CV (PDF)" },
+  ca: { href: "/cv/Pau-Sevilla-CV-ES.pdf", label: "Descarregar CV (PDF, castellà)" },
+}[lang];
 ---
 
 <Layout lang={lang}>
@@ -54,6 +60,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
           <a class="btn solid" href="#contacto">{c.hero.cta}</a>
         </div>
         <ul class="social-buttons">
+          <li><a class="btn ghost cv" href={cv.href} download>{cv.label}</a></li>
           {socials.map(({ href, label, Icon }) => (
             <li>
               <a class="btn ghost" href={href} target="_blank" rel="noopener">
@@ -205,6 +212,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
         <p class="contact-lead"><strong>{c.contact.available}</strong> {c.contact.text}</p>
         <a class="email" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
         <ul class="social-buttons">
+          <li><a class="btn ghost cv" href={cv.href} download>{cv.label}</a></li>
           {socials.map(({ href, label, Icon }) => (
             <li>
               <a class="btn ghost" href={href} target="_blank" rel="noopener">
@@ -237,6 +245,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
   .btn.solid:hover { background: var(--ink); color: var(--bg); }
   .btn.ghost { color: var(--ink); border: 1px solid var(--line); background: var(--surface); }
   .btn.ghost:hover { border-color: var(--ink); }
+  .btn.cv { border-color: var(--accent); color: var(--accent); }
+  .btn.cv:hover { background: var(--accent); color: var(--accent-ink); }
   :global(.ico) { width: 18px; height: 18px; flex: none; }
   .social-buttons, .store-links { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
 
