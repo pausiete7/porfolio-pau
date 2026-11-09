@@ -13,7 +13,7 @@ export const CONTACT = {
   email: "pau.sevilla@icloud.com",
   linkedin: "https://www.linkedin.com/in/pau-sevilla",
   github: "https://github.com/pausiete7",
-  instagram: "https://www.instagram.com/pausiete7/",
+  instagram: "https://www.instagram.com/pau.sevilla7/",
   x: "https://x.com/pausiete7",
 };
 
