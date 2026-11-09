@@ -205,22 +205,22 @@ export const PROJECTS: Project[] = [
     image: flipebooksImg,
     shot: "web",
     tint: "#c98a3d",
-    stack: ["Next.js", "TypeScript", "Supabase", "Stripe", "Vitest", "Playwright"],
+    stack: ["Next.js", "TypeScript", "Supabase", "Stripe", "Vercel AI SDK", "Vitest", "Playwright"],
     links: [{ kind: "web", url: "https://flipebooks.com" }],
     text: {
       es: {
         summary:
-          "Una web que convierte PDF en flipbooks interactivos. La hice con otro desarrollador. Tiene planes de pago y un chat de IA, y tests con Vitest y Playwright.",
+          "Una web que convierte PDF en flipbooks interactivos. La hice con otro desarrollador. Tiene planes de pago y mucha IA: traducción automática de los documentos, textos alternativos para las imágenes, metadatos SEO, informes de analíticas y un chat sobre el documento.",
         imageAlt: "Portada de flipebooks.com",
       },
       en: {
         summary:
-          "A web app that turns PDFs into interactive flipbooks, built with another developer. It has paid plans and an AI chat, and is tested with Vitest and Playwright.",
+          "A web app that turns PDFs into interactive flipbooks, built with another developer. It has paid plans and plenty of AI: automatic document translation, alt text for images, SEO metadata, analytics insights and a chat about the document.",
         imageAlt: "flipebooks.com homepage",
       },
       ca: {
         summary:
-          "Una web que converteix PDF en flipbooks interactius. La vaig fer amb un altre desenvolupador. Té plans de pagament i un xat d'IA, i tests amb Vitest i Playwright.",
+          "Una web que converteix PDF en flipbooks interactius. La vaig fer amb un altre desenvolupador. Té plans de pagament i molta IA: traducció automàtica dels documents, textos alternatius per a les imatges, metadades SEO, informes d'analítica i un xat sobre el document.",
         imageAlt: "Portada de flipebooks.com",
       },
     },
@@ -273,9 +273,9 @@ const EXP_STACK = {
 export const COPY: Record<Lang, Copy> = {
   es: {
     meta: {
-      title: "Pau Sevilla · Desarrollador full-stack y móvil",
+      title: "Pau Sevilla · Desarrollador full stack y móvil",
       description:
-        "Pau Sevilla, desarrollador full-stack y móvil en el inLab FIB (UPC) y estudiante de Ingeniería Informática en la FIB. Ha publicado seis apps y webs, entre ellas Vademecum, con más de 10.000 descargas en Google Play.",
+        "Pau Sevilla, desarrollador full stack y móvil en el inLab FIB (UPC) y estudiante de Ingeniería Informática en la FIB. Ha publicado seis apps y webs, entre ellas Vademecum, con más de 10.000 descargas en Google Play.",
     },
     nav: { projects: "Proyectos", experience: "Experiencia", about: "Sobre mí", contact: "Contacto" },
     skip: "Saltar al contenido",
@@ -298,7 +298,7 @@ export const COPY: Record<Lang, Copy> = {
     experience: {
       title: "Experiencia",
       org: "inLab FIB (UPC)",
-      role: "Desarrollador full-stack y de computación científica (colaborador en formación)",
+      role: "Desarrollador full stack y de computación científica (colaborador en formación)",
       date: "Barcelona · desde diciembre de 2024",
       now: "Ahora",
       items: [
@@ -316,12 +316,12 @@ export const COPY: Record<Lang, Copy> = {
         {
           title: "TurnItOn",
           stack: EXP_STACK.turniton,
-          text: "Hice el frontend y el backend de la nueva web del laboratorio para encender ordenadores a distancia y conectarse a ellos. Sustituyó a una herramienta que se había quedado anticuada.",
+          text: "Hice el frontend y el backend de la nueva web del laboratorio para controlar ordenadores a distancia: encenderlos y conectarse a ellos. Sustituyó a una herramienta que se había quedado anticuada.",
         },
         {
           title: "De MATLAB a C++",
           stack: EXP_STACK.matlab,
-          text: "Durante dos cuatrimestres pasé a C++ un código de MATLAB y lo optimicé. Cambié sus estructuras de datos para que consumieran menos memoria.",
+          text: "Durante dos cuatrimestres pasé a C++ y optimicé un algoritmo de compresión de datos escrito en MATLAB. Cambié sus estructuras de datos para que consumieran menos memoria.",
         },
       ],
     },
@@ -330,7 +330,7 @@ export const COPY: Record<Lang, Copy> = {
       text: "Empecé a programar con 14 años. Vivo en Barcelona y este es mi tercer curso como monitor en el Agrupament Escolta Albada de Rubí.",
       aiTitle: "Cómo uso la IA",
       aiText:
-        "Desde hace un año programo con agentes de IA (Claude Code y Codex). Reviso lo que escriben y nada se publica sin pasar los tests. También he integrado IA en mis productos, como el asistente de Manipulador Hoy.",
+        "Desde hace un año programo con agentes de IA (Claude Code y Codex). También diseño cómo trabajan: configuro agentes, subagentes, skills e instrucciones por proyecto. Reviso lo que escriben y nada se publica sin pasar los tests. También he integrado IA en mis productos, como el asistente de Manipulador Hoy.",
       educationTitle: "Formación",
       education: [
         { title: "Grado en Ingeniería Informática", detail: "FIB, UPC · cuarto curso", date: "2023 – actualidad" },
@@ -401,12 +401,12 @@ export const COPY: Record<Lang, Copy> = {
         {
           title: "TurnItOn",
           stack: EXP_STACK.turniton,
-          text: "I built the frontend and backend of the lab's new web app for switching computers on remotely and connecting to them. It replaced an outdated tool.",
+          text: "I built the frontend and backend of the lab's new web app for controlling computers remotely: switching them on and connecting to them. It replaced an outdated tool.",
         },
         {
           title: "From MATLAB to C++",
           stack: EXP_STACK.matlab,
-          text: "Over two semesters I ported MATLAB code to C++ and optimised it, changing its data structures so they used less memory.",
+          text: "Over two semesters I ported a data compression algorithm from MATLAB to C++ and optimised it, changing its data structures so they used less memory.",
         },
       ],
     },
@@ -415,7 +415,7 @@ export const COPY: Record<Lang, Copy> = {
       text: "I started coding at 14. I live in Barcelona, and this is my third year as a Scout leader with Agrupament Escolta Albada, a Scout group in Rubí, near Barcelona.",
       aiTitle: "How I use AI",
       aiText:
-        "For the past year I've been coding with AI agents (Claude Code and Codex). I review what they write, and nothing ships until the tests pass. I've also built AI into my products, such as the Manipulador Hoy assistant.",
+        "For the past year I've been coding with AI agents (Claude Code and Codex). I also design how they work, setting up agents, subagents, skills and per-project instructions. I review what they write, and nothing ships until the tests pass. I've also built AI into my products, such as the Manipulador Hoy assistant.",
       educationTitle: "Education",
       education: [
         { title: "Bachelor's Degree in Informatics Engineering", detail: "FIB, UPC · fourth year", date: "2023 – present" },
@@ -443,9 +443,9 @@ export const COPY: Record<Lang, Copy> = {
   },
   ca: {
     meta: {
-      title: "Pau Sevilla · Desenvolupador full-stack i mòbil",
+      title: "Pau Sevilla · Desenvolupador full stack i mòbil",
       description:
-        "Pau Sevilla, desenvolupador full-stack i mòbil a l'inLab FIB (UPC) i estudiant d'Enginyeria Informàtica a la FIB. Ha publicat sis apps i webs, entre les quals Vademecum, amb més de 10.000 descàrregues a Google Play.",
+        "Pau Sevilla, desenvolupador full stack i mòbil a l'inLab FIB (UPC) i estudiant d'Enginyeria Informàtica a la FIB. Ha publicat sis apps i webs, entre les quals Vademecum, amb més de 10.000 descàrregues a Google Play.",
     },
     nav: { projects: "Projectes", experience: "Experiència", about: "Sobre mi", contact: "Contacte" },
     skip: "Salta al contingut",
@@ -468,7 +468,7 @@ export const COPY: Record<Lang, Copy> = {
     experience: {
       title: "Experiència",
       org: "inLab FIB (UPC)",
-      role: "Desenvolupador full-stack i de computació científica (col·laborador en formació)",
+      role: "Desenvolupador full stack i de computació científica (col·laborador en formació)",
       date: "Barcelona · des del desembre de 2024",
       now: "Ara",
       items: [
@@ -486,12 +486,12 @@ export const COPY: Record<Lang, Copy> = {
         {
           title: "TurnItOn",
           stack: EXP_STACK.turniton,
-          text: "Vaig fer el frontend i el backend de la nova web del laboratori per encendre ordinadors a distància i connectar-s'hi. Va substituir una eina que havia quedat antiquada.",
+          text: "Vaig fer el frontend i el backend de la nova web del laboratori per controlar ordinadors a distància: encendre'ls i connectar-s'hi. Va substituir una eina que havia quedat antiquada.",
         },
         {
           title: "De MATLAB a C++",
           stack: EXP_STACK.matlab,
-          text: "Durant dos quadrimestres vaig passar a C++ un codi de MATLAB i el vaig optimitzar. Vaig canviar-ne les estructures de dades perquè consumissin menys memòria.",
+          text: "Durant dos quadrimestres vaig passar a C++ i optimitzar un algorisme de compressió de dades escrit en MATLAB. Vaig canviar-ne les estructures de dades perquè consumissin menys memòria.",
         },
       ],
     },
@@ -500,7 +500,7 @@ export const COPY: Record<Lang, Copy> = {
       text: "Vaig començar a programar amb 14 anys. Visc a Barcelona i aquest és el tercer curs que faig de monitor a l'Agrupament Escolta Albada de Rubí.",
       aiTitle: "Com faig servir la IA",
       aiText:
-        "Des de fa un any programo amb agents d'IA (Claude Code i Codex). Reviso el que escriuen i no publico res que no passi els tests. També he integrat IA als meus productes, com l'assistent de Manipulador Hoy.",
+        "Des de fa un any programo amb agents d'IA (Claude Code i Codex). També dissenyo com treballen: configuro agents, subagents, skills i instruccions per projecte. Reviso el que escriuen i no publico res que no passi els tests. També he integrat IA als meus productes, com l'assistent de Manipulador Hoy.",
       educationTitle: "Formació",
       education: [
         { title: "Grau en Enginyeria Informàtica", detail: "FIB, UPC · quart curs", date: "2023 – actualitat" },

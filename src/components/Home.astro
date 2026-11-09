@@ -133,7 +133,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
           <p class="org-blurb">{orgBlurb}</p>
         </aside>
         <ol class="jobs">
-          {c.experience.items.map((it, i) => (
+          {/* De lo más reciente a lo más antiguo: LaCàN, MATLAB→C++, portal HPC, TurnItOn */}
+          {[0, 3, 1, 2].map((k) => c.experience.items[k]).map((it, i) => (
             <li>
               <span class="num" aria-hidden="true">{pad(i + 1)}</span>
               <div class="job-main">
