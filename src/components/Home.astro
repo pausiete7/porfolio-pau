@@ -241,12 +241,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
   /* Portada */
   .hero {
-    display: grid; grid-template-columns: 1fr auto; grid-template-areas: "kick photo" "text text";
-    gap: 1.25rem; align-items: end; padding-block: 2.25rem 0.5rem;
+    display: grid; grid-template-columns: auto 1fr; grid-template-areas: "photo kick" "text text";
+    gap: 1rem 0.85rem; align-items: center; padding-block: 2rem 0.5rem;
   }
   .hero-text { display: contents; }
   .kicker { grid-area: kick; margin: 0; color: var(--accent); font-weight: 600; }
-  .portrait { grid-area: photo; width: 112px; height: 132px; object-fit: cover; object-position: 50% 30%; border-radius: 8px; }
+  .portrait { grid-area: photo; width: 60px; height: 60px; object-fit: cover; object-position: 50% 28%; border-radius: 50%; }
   h1 { grid-column: 1 / -1; font-size: clamp(2.3rem, 8.5vw, 4.1rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0.25rem 0 0; text-wrap: balance; }
   .summary { grid-column: 1 / -1; font-size: clamp(1.1rem, 3.6vw, 1.3rem); line-height: 1.55; max-width: 38em; margin: 0; }
   .pitch {
@@ -334,7 +334,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
   @media (min-width: 768px) {
     .hero { grid-template-columns: 1fr 280px; grid-template-areas: "text photo"; gap: 3.5rem; align-items: center; padding-block: 4.5rem 1rem; }
     .hero-text { display: flex; flex-direction: column; gap: 1.1rem; grid-area: text; }
-    .portrait { width: 280px; height: 340px; }
+    .portrait { width: 280px; height: 340px; border-radius: 8px; object-position: 50% 30%; }
     .block { padding-top: 6rem; }
 
     .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2.5rem; }
