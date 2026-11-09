@@ -56,21 +56,21 @@ export const PROJECTS: Project[] = [
     text: {
       es: {
         summary:
-          "Una app de medicamentos con los datos oficiales de la AEMPS que se había quedado muy desactualizada. La rehíce desde cero en Flutter. La base de datos va en el móvil, cifrada, y se sincroniza en tiempo real con Supabase; las suscripciones las gestiona RevenueCat.",
+          "Una app de medicamentos con los datos oficiales de la AEMPS que se había quedado muy desactualizada. La rehíce desde cero en Flutter. La base de datos va en el móvil, cifrada, y se sincroniza en tiempo real con Supabase. Las suscripciones las gestiona RevenueCat.",
         metric: "Más de 10.000 descargas en Google Play",
         metricNote: "4,8 de valoración en App Store (13 valoraciones)",
         imageAlt: "Pantalla de búsqueda de Vademecum",
       },
       en: {
         summary:
-          "I rebuilt a badly outdated medicines app from scratch in Flutter, using official data from the Spanish Medicines Agency (AEMPS). The database lives on the phone, encrypted, and syncs in real time with Supabase; subscriptions are handled by RevenueCat.",
+          "I rebuilt a badly outdated medicines app from scratch in Flutter, using official data from the Spanish Medicines Agency (AEMPS). The database lives on the phone, encrypted, and syncs in real time with Supabase. Subscriptions are handled by RevenueCat.",
         metric: "10,000+ downloads on Google Play",
         metricNote: "Rated 4.8 on the App Store (13 ratings)",
         imageAlt: "Vademecum search screen",
       },
       ca: {
         summary:
-          "Una app de medicaments amb les dades oficials de l'AEMPS que havia quedat obsoleta. La vaig refer des de zero en Flutter. La base de dades va al mòbil, xifrada, i se sincronitza en temps real amb Supabase; les subscripcions les gestiona RevenueCat.",
+          "Una app de medicaments amb les dades oficials de l'AEMPS que havia quedat obsoleta. La vaig refer des de zero en Flutter. La base de dades va al mòbil, xifrada, i se sincronitza en temps real amb Supabase. Les subscripcions les gestiona RevenueCat.",
         metric: "Més de 10.000 descàrregues a Google Play",
         metricNote: "4,8 de valoració a l'App Store (13 valoracions)",
         imageAlt: "Pantalla de cerca de Vademecum",
@@ -174,24 +174,25 @@ export const PROJECTS: Project[] = [
     image: manipuladorImg,
     shot: "web",
     tint: "#1f7a3d",
-    stack: ["Expo", "React Native", "TypeScript", "Supabase", "Stripe"],
+    featured: true,
+    stack: ["Expo", "React Native", "TypeScript", "Supabase", "Stripe", "Brevo", "Google Wallet"],
     links: [{ kind: "web", url: "https://manipuladorhoy.es" }],
     text: {
       es: {
         summary:
-          "Web y app para sacar el certificado de manipulador de alimentos. El examen es gratis; si apruebas, pagas con Stripe y te descargas el certificado, que lleva un QR para verificarlo. Además usa Google Wallet, los correos salen por Brevo y tiene un asistente hecho con la API de Claude.",
+          "Web y app para sacar el certificado de manipulador de alimentos. El examen es gratis y, si apruebas, pagas con Stripe y te descargas el certificado con un QR para verificarlo. Se puede guardar en Google Wallet, los correos salen por Brevo y hay un asistente hecho con la API de Claude.",
         metric: "Lanzado en 2026, ya con ventas",
         imageAlt: "Portada de manipuladorhoy.es",
       },
       en: {
         summary:
-          "Web and mobile app to get a Spanish food handler certificate. The exam is free; if you pass, you pay with Stripe and download the certificate, which carries a QR code to verify it. It also supports Google Wallet, sends email through Brevo and has an assistant built on the Claude API.",
+          "Web and mobile app to get a Spanish food handler certificate. The exam is free and, if you pass, you pay with Stripe and download a certificate with a QR code to verify it. It can be saved to Google Wallet, emails go out through Brevo and there's an assistant built on the Claude API.",
         metric: "Launched in 2026, already selling",
         imageAlt: "manipuladorhoy.es home page",
       },
       ca: {
         summary:
-          "Web i app per treure el certificat de manipulador d'aliments. L'examen és gratuït; si aproves, pagues amb Stripe i et descarregues el certificat, que porta un QR per verificar-lo. A més, fa servir Google Wallet, els correus surten per Brevo i té un assistent fet amb l'API de Claude.",
+          "Web i app per treure el certificat de manipulador d'aliments. L'examen és gratuït i, si aproves, pagues amb Stripe i et descarregues el certificat amb un QR per verificar-lo. Es pot desar a Google Wallet, els correus surten per Brevo i hi ha un assistent fet amb l'API de Claude.",
         metric: "Llançat el 2026, ja amb vendes",
         imageAlt: "Portada de manipuladorhoy.es",
       },
@@ -237,7 +238,7 @@ interface Copy {
   meta: { title: string; description: string };
   nav: { projects: string; experience: string; about: string; contact: string };
   skip: string;
-  hero: { kicker: string; headline: string; summary: string; cta: string; photoAlt: string };
+  hero: { kicker: string; headline: string; summary: string; pitch: string; cta: string; photoAlt: string };
   projects: { title: string; intro: string; appstore: string; googleplay: string; web: string };
   experience: { title: string; org: string; role: string; date: string; now: string; items: ExperienceItem[] };
   about: {
@@ -250,7 +251,7 @@ interface Copy {
     languagesTitle: string;
     languages: string;
   };
-  skills: { title: string; note: string; groups: { name: string; items: string[] }[] };
+  skills: { title: string; groups: { name: string; items: string[] }[] };
   contact: { title: string; available: string; text: string; elsewhere: string };
   footer: string;
 }
@@ -282,7 +283,8 @@ export const COPY: Record<Lang, Copy> = {
       kicker: "Pau Sevilla · Barcelona",
       headline: "Hago apps móviles y webs.",
       summary:
-        "Estudio cuarto de Ingeniería Informática en la FIB y desde diciembre de 2024 trabajo en el inLab FIB, en webs para la universidad y en código C++ de grupos de investigación. Por mi cuenta hago apps y las publico; Vademecum pasa de 10.000 descargas en Google Play.",
+        "Estudio cuarto de Ingeniería Informática en la FIB y trabajo en el inLab desde diciembre de 2024, en webs para la universidad y en código C++ de grupos de investigación. Además publico mis propias apps, y Vademecum pasa de 10.000 descargas en Google Play.",
+      pitch: "¿Necesitas una app móvil o una web? Cuéntame tu idea.",
       cta: "Escríbeme",
       photoAlt: "Foto de Pau Sevilla",
     },
@@ -301,10 +303,10 @@ export const COPY: Record<Lang, Copy> = {
       now: "Ahora",
       items: [
         {
-          title: "Librería del LaCàN",
+          title: "Biblioteca del LaCàN",
           stack: EXP_STACK.lacan,
           now: true,
-          text: "Llevo el refactor de la librería open source de ingeniería computacional del LaCàN, que empezó en MATLAB, hacia C++ moderno con bindings de Python y tests. El frontend y el backend los hace otro equipo.",
+          text: "Llevo el refactor de la biblioteca open source de ingeniería computacional del LaCàN, que empezó en MATLAB, hacia C++ moderno con bindings de Python y tests. La interfaz y el servidor los desarrolla otro equipo.",
         },
         {
           title: "Portal HPC para el grupo BIT de la Escola de Camins",
@@ -314,21 +316,21 @@ export const COPY: Record<Lang, Copy> = {
         {
           title: "TurnItOn",
           stack: EXP_STACK.turniton,
-          text: "Hice el frontend y el backend de la nueva web del laboratorio para encender ordenadores a distancia y conectarse a ellos. Sustituye a la herramienta antigua.",
+          text: "Hice el frontend y el backend de la nueva web del laboratorio para encender ordenadores a distancia y conectarse a ellos. Sustituyó a una herramienta que se había quedado anticuada.",
         },
         {
           title: "De MATLAB a C++",
           stack: EXP_STACK.matlab,
-          text: "Durante dos cuatrimestres pasé a C++ un código de MATLAB y lo optimicé; cambié sus estructuras de datos para que consumieran menos memoria.",
+          text: "Durante dos cuatrimestres pasé a C++ un código de MATLAB y lo optimicé. Cambié sus estructuras de datos para que consumieran menos memoria.",
         },
       ],
     },
     about: {
       title: "Sobre mí",
-      text: "Programo desde los 14 años. Vivo en Barcelona y, fuera del código, soy monitor en el Agrupament Escolta Albada de Rubí; este es mi tercer curso.",
+      text: "Empecé a programar con 14 años. Vivo en Barcelona y soy monitor en el Agrupament Escolta Albada de Rubí, donde voy por mi tercer curso.",
       aiTitle: "Cómo uso la IA",
       aiText:
-        "Desde hace un año programo con agentes de IA, Claude Code y Codex. Yo decido qué se hace, reviso el código que escriben y nada se publica sin pasar los tests. También he integrado IA en mis productos; por ejemplo, el asistente de Manipulador Hoy usa la API de Claude.",
+        "Desde hace un año programo con agentes de IA (Claude Code y Codex). Reviso lo que escriben y nada se publica sin pasar los tests. También he integrado IA en mis productos, como el asistente de Manipulador Hoy.",
       educationTitle: "Formación",
       education: [
         { title: "Grado en Ingeniería Informática", detail: "FIB, UPC · cuarto curso", date: "2023 – hoy" },
@@ -339,7 +341,6 @@ export const COPY: Record<Lang, Copy> = {
     },
     skills: {
       title: "Habilidades",
-      note: "En negrita, lo que aparece en los proyectos y la experiencia de esta página.",
       groups: [
         { name: "Lenguajes", items: SKILLS_ITEMS.languages },
         { name: "Frameworks", items: SKILLS_ITEMS.frameworks },
@@ -367,7 +368,8 @@ export const COPY: Record<Lang, Copy> = {
       kicker: "Pau Sevilla · Barcelona",
       headline: "I build mobile apps and websites.",
       summary:
-        "I'm in my fourth year of Computer Engineering at FIB and, since December 2024, I've worked at inLab FIB on web apps for the university and on C++ code for research groups. I also build and ship my own apps; Vademecum has over 10,000 downloads on Google Play.",
+        "I'm in my fourth year of Computer Engineering at FIB and, since December 2024, I've worked at inLab on web apps for the university and on C++ code for research groups. I also ship my own apps, and Vademecum has over 10,000 downloads on Google Play.",
+      pitch: "Need a mobile app or a website? Tell me about your idea.",
       cta: "Get in touch",
       photoAlt: "Photo of Pau Sevilla",
     },
@@ -389,7 +391,7 @@ export const COPY: Record<Lang, Copy> = {
           title: "LaCàN library",
           stack: EXP_STACK.lacan,
           now: true,
-          text: "I'm in charge of refactoring LaCàN's open-source computational engineering library, which started out in MATLAB, into modern C++ with Python bindings and tests. Another team builds the frontend and backend.",
+          text: "I'm in charge of refactoring LaCàN's open-source computational engineering library, which started out in MATLAB, into modern C++ with Python bindings and tests. Another team builds the interface and the server.",
         },
         {
           title: "HPC portal for the BIT group at the Barcelona School of Civil Engineering",
@@ -399,7 +401,7 @@ export const COPY: Record<Lang, Copy> = {
         {
           title: "TurnItOn",
           stack: EXP_STACK.turniton,
-          text: "I built the frontend and backend of the lab's new web app for switching computers on remotely and connecting to them. It replaces the old tool.",
+          text: "I built the frontend and backend of the lab's new web app for switching computers on remotely and connecting to them. It replaced a tool that had become outdated.",
         },
         {
           title: "From MATLAB to C++",
@@ -410,10 +412,10 @@ export const COPY: Record<Lang, Copy> = {
     },
     about: {
       title: "About",
-      text: "I've been coding since I was 14. I live in Barcelona and, away from code, I'm a scout leader with the Agrupament Escolta Albada in Rubí, now in my third year.",
+      text: "I started coding at 14. I live in Barcelona and I'm a scout leader with the Agrupament Escolta Albada in Rubí, now in my third year.",
       aiTitle: "How I use AI",
       aiText:
-        "For the past year I've been coding with AI agents, Claude Code and Codex. I decide what gets built, review the code they write, and nothing ships without passing the tests. I've also built AI into my products; for example, the Manipulador Hoy assistant runs on the Claude API.",
+        "For the past year I've been coding with AI agents (Claude Code and Codex). I review what they write and nothing ships without passing the tests. I've also built AI into my products, such as the Manipulador Hoy assistant.",
       educationTitle: "Education",
       education: [
         { title: "BSc in Computer Engineering", detail: "FIB, UPC · fourth year", date: "2023 – present" },
@@ -424,7 +426,6 @@ export const COPY: Record<Lang, Copy> = {
     },
     skills: {
       title: "Skills",
-      note: "In bold, what appears in the projects and experience on this page.",
       groups: [
         { name: "Languages", items: SKILLS_ITEMS.languages },
         { name: "Frameworks", items: SKILLS_ITEMS.frameworks },
@@ -452,7 +453,8 @@ export const COPY: Record<Lang, Copy> = {
       kicker: "Pau Sevilla · Barcelona",
       headline: "Faig apps mòbils i webs.",
       summary:
-        "Estudio quart d'Enginyeria Informàtica a la FIB i des del desembre de 2024 treballo a l'inLab FIB, en webs per a la universitat i en codi C++ de grups de recerca. Pel meu compte faig apps i les publico; Vademecum supera les 10.000 descàrregues a Google Play.",
+        "Estudio quart d'Enginyeria Informàtica a la FIB i treballo a l'inLab des del desembre de 2024, en webs per a la universitat i en codi C++ de grups de recerca. A més, publico les meves pròpies apps, i Vademecum supera les 10.000 descàrregues a Google Play.",
+      pitch: "Necessites una app mòbil o una web? Explica'm la teva idea.",
       cta: "Escriu-me",
       photoAlt: "Foto de Pau Sevilla",
     },
@@ -474,7 +476,7 @@ export const COPY: Record<Lang, Copy> = {
           title: "Biblioteca del LaCàN",
           stack: EXP_STACK.lacan,
           now: true,
-          text: "M'encarrego de la refactorització de la biblioteca open source d'enginyeria computacional del LaCàN, que va començar en MATLAB, cap a C++ modern amb bindings de Python i tests. El frontend i el backend els fa un altre equip.",
+          text: "M'encarrego de la refactorització de la biblioteca open source d'enginyeria computacional del LaCàN, que va començar en MATLAB, cap a C++ modern amb bindings de Python i tests. La interfície i el servidor els desenvolupa un altre equip.",
         },
         {
           title: "Portal HPC per al grup BIT de l'Escola de Camins",
@@ -484,21 +486,21 @@ export const COPY: Record<Lang, Copy> = {
         {
           title: "TurnItOn",
           stack: EXP_STACK.turniton,
-          text: "Vaig fer el frontend i el backend de la nova web del laboratori per encendre ordinadors a distància i connectar-s'hi. Substitueix l'eina antiga.",
+          text: "Vaig fer el frontend i el backend de la nova web del laboratori per encendre ordinadors a distància i connectar-s'hi. Va substituir una eina que havia quedat antiquada.",
         },
         {
           title: "De MATLAB a C++",
           stack: EXP_STACK.matlab,
-          text: "Durant dos quadrimestres vaig passar a C++ un codi de MATLAB i el vaig optimitzar; vaig canviar-ne les estructures de dades perquè consumissin menys memòria.",
+          text: "Durant dos quadrimestres vaig passar a C++ un codi de MATLAB i el vaig optimitzar. Vaig canviar-ne les estructures de dades perquè consumissin menys memòria.",
         },
       ],
     },
     about: {
       title: "Sobre mi",
-      text: "Programo des dels 14 anys. Visc a Barcelona i, fora del codi, soc monitor a l'Agrupament Escolta Albada de Rubí; aquest és el meu tercer curs.",
+      text: "Vaig començar a programar amb 14 anys. Visc a Barcelona i soc monitor a l'Agrupament Escolta Albada de Rubí, on faig el meu tercer curs.",
       aiTitle: "Com faig servir la IA",
       aiText:
-        "Des de fa un any programo amb agents d'IA, Claude Code i Codex. Jo decideixo què es fa, reviso el codi que escriuen i no es publica res sense passar els tests. També he integrat IA en els meus productes; per exemple, l'assistent de Manipulador Hoy fa servir l'API de Claude.",
+        "Des de fa un any programo amb agents d'IA (Claude Code i Codex). Reviso el que escriuen i no es publica res sense passar els tests. També he integrat IA en els meus productes, com l'assistent de Manipulador Hoy.",
       educationTitle: "Formació",
       education: [
         { title: "Grau en Enginyeria Informàtica", detail: "FIB, UPC · quart curs", date: "2023 – avui" },
@@ -509,7 +511,6 @@ export const COPY: Record<Lang, Copy> = {
     },
     skills: {
       title: "Habilitats",
-      note: "En negreta, el que apareix als projectes i a l'experiència d'aquesta pàgina.",
       groups: [
         { name: "Llenguatges", items: SKILLS_ITEMS.languages },
         { name: "Frameworks", items: SKILLS_ITEMS.frameworks },
