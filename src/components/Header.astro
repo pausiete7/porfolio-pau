@@ -33,9 +33,7 @@ const links = [
 <style>
   .site-header {
     position: sticky; top: 0; z-index: 50;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: saturate(1.4) blur(10px);
-    border-bottom: 1px solid var(--line);
+    background: var(--bg);
   }
   .bar {
     display: grid;
@@ -47,7 +45,7 @@ const links = [
   }
   .brand {
     grid-area: brand;
-    font-family: var(--font-head); font-weight: 600; font-size: 1.05rem;
+    font-family: var(--font-head); font-weight: 600; font-size: 1.2rem;
     color: var(--ink); text-decoration: none;
   }
   nav { grid-area: nav; overflow-x: auto; scrollbar-width: none; margin-inline: -0.5rem; }
@@ -55,8 +53,8 @@ const links = [
   ul { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0.35rem 0 0.45rem; }
   nav a {
     display: inline-block; white-space: nowrap;
-    padding: 0.45rem 0.6rem; min-height: 44px; box-sizing: border-box; line-height: 1.7;
-    color: var(--muted); text-decoration: none; font-size: 0.95rem; border-radius: 8px;
+    padding: 0.45rem 0.5rem; min-height: 44px; box-sizing: border-box; line-height: 1.7;
+    color: var(--muted); text-decoration: none; font-size: 0.92rem; border-radius: 6px;
   }
   nav a:hover { color: var(--ink); background: var(--surface-2); }
 

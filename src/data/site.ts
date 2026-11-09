@@ -31,9 +31,12 @@ export interface Project {
   image: ImageMetadata;
   /** Captura de móvil (vertical) o de web. */
   shot: "app" | "web";
+  /** Color sacado de la propia captura, para el fondo de la imagen. */
+  tint: string;
+  featured?: boolean;
   stack: string[];
   links: ProjectLink[];
-  text: Record<Lang, { summary: string; metric?: string; imageAlt: string }>;
+  text: Record<Lang, { summary: string; metric?: string; metricNote?: string; imageAlt: string }>;
 }
 
 export const PROJECTS: Project[] = [
@@ -43,6 +46,8 @@ export const PROJECTS: Project[] = [
     year: "2023 – 2026",
     image: vademecumImg,
     shot: "app",
+    tint: "#e5483f",
+    featured: true,
     stack: ["Flutter", "SQLite", "Supabase", "RevenueCat"],
     links: [
       { kind: "appstore", url: "https://apps.apple.com/es/app/id1187696022" },
@@ -51,20 +56,23 @@ export const PROJECTS: Project[] = [
     text: {
       es: {
         summary:
-          "Rehíce desde cero en Flutter una app de medicamentos con los datos oficiales de la AEMPS que se había quedado muy desactualizada: base de datos local cifrada, sincronización en tiempo real con Supabase y suscripciones con RevenueCat.",
-        metric: "Más de 10.000 descargas en Google Play · 4,8 en App Store",
+          "Una app de medicamentos con los datos oficiales de la AEMPS que se había quedado muy desactualizada. La rehíce desde cero en Flutter. La base de datos va en el móvil, cifrada, y se sincroniza en tiempo real con Supabase; las suscripciones las gestiona RevenueCat.",
+        metric: "Más de 10.000 descargas en Google Play",
+        metricNote: "4,8 de valoración en App Store (13 valoraciones)",
         imageAlt: "Pantalla de búsqueda de Vademecum",
       },
       en: {
         summary:
-          "I rebuilt from scratch in Flutter a medicines app based on official data from the Spanish Medicines Agency (AEMPS) that had become badly outdated: encrypted local database, real-time sync with Supabase and subscriptions with RevenueCat.",
-        metric: "10,000+ downloads on Google Play · 4.8 on the App Store",
+          "I rebuilt a badly outdated medicines app from scratch in Flutter, using official data from the Spanish Medicines Agency (AEMPS). The database lives on the phone, encrypted, and syncs in real time with Supabase; subscriptions are handled by RevenueCat.",
+        metric: "10,000+ downloads on Google Play",
+        metricNote: "Rated 4.8 on the App Store (13 ratings)",
         imageAlt: "Vademecum search screen",
       },
       ca: {
         summary:
-          "Vaig refer des de zero en Flutter una app de medicaments amb les dades oficials de l'AEMPS que s'havia quedat molt desactualitzada: base de dades local xifrada, sincronització en temps real amb Supabase i subscripcions amb RevenueCat.",
-        metric: "Més de 10.000 descàrregues a Google Play · 4,8 a l'App Store",
+          "Una app de medicaments amb les dades oficials de l'AEMPS que havia quedat obsoleta. La vaig refer des de zero en Flutter. La base de dades va al mòbil, xifrada, i se sincronitza en temps real amb Supabase; les subscripcions les gestiona RevenueCat.",
+        metric: "Més de 10.000 descàrregues a Google Play",
+        metricNote: "4,8 de valoració a l'App Store (13 valoracions)",
         imageAlt: "Pantalla de cerca de Vademecum",
       },
     },
@@ -75,6 +83,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     image: vetImg,
     shot: "app",
+    tint: "#2f6d4f",
     stack: ["Flutter", "Node.js", "Dart", "Supabase", "GitHub Actions"],
     links: [
       { kind: "appstore", url: "https://apps.apple.com/es/app/id6817796985" },
@@ -104,6 +113,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     image: aptoImg,
     shot: "app",
+    tint: "#3f9a5b",
     stack: ["Flutter", "SQLite", "Python", "RevenueCat"],
     links: [
       { kind: "appstore", url: "https://apps.apple.com/es/app/id6813851821" },
@@ -112,17 +122,17 @@ export const PROJECTS: Project[] = [
     text: {
       es: {
         summary:
-          "Para preparar el teórico de coche, moto y ciclomotor: más de 1.500 preguntas de coche y más de 500 de moto y de ciclomotor, cada una con su fuente oficial. Se generan con Python, pasan un linter en CI y llegan a la app en paquetes firmados.",
+          "Sirve para preparar el teórico de coche, moto y ciclomotor. Tiene más de 1.500 preguntas de coche, más de 500 de moto y otras tantas de ciclomotor, y cada una indica su fuente oficial. Los paquetes de preguntas se montan con Python, pasan un linter en la CI y llegan a la app firmados.",
         imageAlt: "Resultado de un simulacro en Apto",
       },
       en: {
         summary:
-          "Prep for the Spanish driving theory test for car, motorbike and moped: over 1,500 car questions and over 500 each for motorbike and moped, every one with its official source. Questions are generated with Python, linted in CI and shipped to the app in signed packages.",
+          "Prep for the Spanish driving theory test for car, motorbike and moped. It has over 1,500 car questions and over 500 each for motorbike and moped, and every question cites its official source. The question packs are built with Python, linted in CI and shipped to the app signed.",
         imageAlt: "Mock exam result in Apto",
       },
       ca: {
         summary:
-          "Per preparar el teòric de cotxe, moto i ciclomotor: més de 1.500 preguntes de cotxe i més de 500 de moto i de ciclomotor, cadascuna amb la seva font oficial. Es generen amb Python, passen un linter a la CI i arriben a l'app en paquets signats.",
+          "Serveix per preparar el teòric de cotxe, moto i ciclomotor. Té més de 1.500 preguntes de cotxe, més de 500 de moto i unes altres tantes de ciclomotor, i cadascuna indica la seva font oficial. Els paquets de preguntes es munten amb Python, passen un linter a la CI i arriben a l'app signats.",
         imageAlt: "Resultat d'un simulacre a Apto",
       },
     },
@@ -133,6 +143,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     image: parcelarioImg,
     shot: "app",
+    tint: "#d9a92e",
     stack: ["Flutter", "MapLibre", "SQLite"],
     links: [
       { kind: "appstore", url: "https://apps.apple.com/es/app/id6822248499" },
@@ -141,17 +152,17 @@ export const PROJECTS: Project[] = [
     text: {
       es: {
         summary:
-          "Visor de parcelas SIGPAC y Catastro sobre la ortofoto del PNOA: buscas por polígono y parcela o referencia catastral y mides fincas. Un workflow comprueba dos veces al día que responden las APIs públicas de las que depende.",
+          "Visor de parcelas SIGPAC y Catastro sobre la ortofoto del PNOA. Buscas por polígono y parcela o por referencia catastral y mides fincas. Un workflow comprueba dos veces al día que siguen respondiendo las APIs públicas de las que depende.",
         imageAlt: "Mapa de recintos SIGPAC en Parcelario",
       },
       en: {
         summary:
-          "A viewer for Spanish land parcels (SIGPAC and Cadastre) over aerial imagery: search by polygon and parcel or cadastral reference and measure plots. A workflow checks twice a day that the public APIs it depends on are still responding.",
+          "A viewer for Spanish land parcels (SIGPAC and Cadastre) over aerial imagery. You search by polygon and parcel or by cadastral reference, and measure plots. A workflow checks twice a day that the public APIs it relies on are still up.",
         imageAlt: "SIGPAC parcel map in Parcelario",
       },
       ca: {
         summary:
-          "Visor de parcel·les SIGPAC i Cadastre sobre l'ortofoto del PNOA: cerques per polígon i parcel·la o referència cadastral i mesures finques. Un workflow comprova dues vegades al dia que responen les APIs públiques de què depèn.",
+          "Visor de parcel·les SIGPAC i Cadastre sobre l'ortofoto del PNOA. Cerques per polígon i parcel·la o per referència cadastral i mesures finques. Un workflow comprova dues vegades al dia que les APIs públiques de què depèn continuen responent.",
         imageAlt: "Mapa de recintes SIGPAC a Parcelario",
       },
     },
@@ -162,24 +173,25 @@ export const PROJECTS: Project[] = [
     year: "2026",
     image: manipuladorImg,
     shot: "web",
+    tint: "#1f7a3d",
     stack: ["Expo", "React Native", "TypeScript", "Supabase", "Stripe"],
     links: [{ kind: "web", url: "https://manipuladorhoy.es" }],
     text: {
       es: {
         summary:
-          "Web y app para sacar el certificado de manipulador de alimentos: el examen es gratis y, si apruebas, pagas con Stripe y descargas el certificado con un QR para verificarlo. Con Google Wallet, correos con Brevo y un asistente con la API de Claude.",
+          "Web y app para sacar el certificado de manipulador de alimentos. El examen es gratis; si apruebas, pagas con Stripe y te descargas el certificado, que lleva un QR para verificarlo. Además usa Google Wallet, los correos salen por Brevo y tiene un asistente hecho con la API de Claude.",
         metric: "Lanzado en 2026, ya con ventas",
         imageAlt: "Portada de manipuladorhoy.es",
       },
       en: {
         summary:
-          "Web and mobile app to get a Spanish food handler certificate: the exam is free and, if you pass, you pay with Stripe and download a certificate with a QR code to verify it. With Google Wallet, Brevo emails and an assistant built on the Claude API.",
+          "Web and mobile app to get a Spanish food handler certificate. The exam is free; if you pass, you pay with Stripe and download the certificate, which carries a QR code to verify it. It also supports Google Wallet, sends email through Brevo and has an assistant built on the Claude API.",
         metric: "Launched in 2026, already selling",
         imageAlt: "manipuladorhoy.es home page",
       },
       ca: {
         summary:
-          "Web i app per treure el certificat de manipulador d'aliments: l'examen és gratuït i, si aproves, pagues amb Stripe i descarregues el certificat amb un QR per verificar-lo. Amb Google Wallet, correus amb Brevo i un assistent amb l'API de Claude.",
+          "Web i app per treure el certificat de manipulador d'aliments. L'examen és gratuït; si aproves, pagues amb Stripe i et descarregues el certificat, que porta un QR per verificar-lo. A més, fa servir Google Wallet, els correus surten per Brevo i té un assistent fet amb l'API de Claude.",
         metric: "Llançat el 2026, ja amb vendes",
         imageAlt: "Portada de manipuladorhoy.es",
       },
@@ -191,22 +203,23 @@ export const PROJECTS: Project[] = [
     year: "2026",
     image: flipebooksImg,
     shot: "web",
-    stack: ["Next.js", "TypeScript", "Supabase", "Stripe"],
+    tint: "#c98a3d",
+    stack: ["Next.js", "TypeScript", "Supabase", "Stripe", "Vitest", "Playwright"],
     links: [{ kind: "web", url: "https://flipebooks.com" }],
     text: {
       es: {
         summary:
-          "Con otro desarrollador hicimos una web que convierte PDFs en flipbooks interactivos, con planes de pago, chat de IA y tests con Vitest y Playwright.",
+          "Una web que convierte PDFs en flipbooks interactivos. La hice con otro desarrollador. Tiene planes de pago y un chat de IA, y la probamos con Vitest y Playwright.",
         imageAlt: "Portada de flipebooks.com",
       },
       en: {
         summary:
-          "Together with another developer, we built a web app that turns PDFs into interactive flipbooks, with paid plans, an AI chat and tests with Vitest and Playwright.",
+          "A web app that turns PDFs into interactive flipbooks. I built it with another developer. It has paid plans and an AI chat, and we test it with Vitest and Playwright.",
         imageAlt: "flipebooks.com home page",
       },
       ca: {
         summary:
-          "Amb un altre desenvolupador vam fer una web que converteix PDFs en flipbooks interactius, amb plans de pagament, xat d'IA i tests amb Vitest i Playwright.",
+          "Una web que converteix PDFs en flipbooks interactius. La vaig fer amb un altre desenvolupador. Té plans de pagament i un xat d'IA, i la provem amb Vitest i Playwright.",
         imageAlt: "Portada de flipebooks.com",
       },
     },
@@ -215,36 +228,30 @@ export const PROJECTS: Project[] = [
 
 interface ExperienceItem {
   title: string;
-  stack: string;
+  stack: string[];
   text: string;
+  now?: boolean;
 }
 
 interface Copy {
   meta: { title: string; description: string };
   nav: { projects: string; experience: string; about: string; contact: string };
   skip: string;
-  hero: {
-    badge: string;
-    role: string;
-    summary: string;
-    ctaProjects: string;
-    ctaContact: string;
-    photoAlt: string;
-  };
-  stats: { value: string; label: string }[];
+  hero: { kicker: string; headline: string; summary: string; cta: string; photoAlt: string };
   projects: { title: string; intro: string; appstore: string; googleplay: string; web: string };
-  experience: {
+  experience: { title: string; org: string; role: string; date: string; now: string; items: ExperienceItem[] };
+  about: {
     title: string;
-    org: string;
-    role: string;
-    date: string;
-    place: string;
-    items: ExperienceItem[];
+    text: string;
+    aiTitle: string;
+    aiText: string;
+    educationTitle: string;
+    education: { title: string; detail: string; date: string }[];
+    languagesTitle: string;
+    languages: string;
   };
-  ai: { title: string; text: string };
-  about: { title: string; text: string; educationTitle: string; education: { title: string; detail: string; date: string }[]; languagesTitle: string; languages: string };
-  skills: { title: string; groups: { name: string; items: string[] }[] };
-  contact: { title: string; text: string; emailLabel: string };
+  skills: { title: string; note: string; groups: { name: string; items: string[] }[] };
+  contact: { title: string; available: string; text: string; elsewhere: string };
   footer: string;
 }
 
@@ -255,72 +262,73 @@ const SKILLS_ITEMS = {
   tools: ["Git", "GitHub Actions", "Codemagic", "Sentry", "Jest", "Vitest", "Playwright", "Maestro", "Slurm"],
 };
 
+const EXP_STACK = {
+  lacan: ["C++", "Python"],
+  hpc: ["Angular", "Node.js", "Slurm"],
+  turniton: ["Angular", "Laravel", "PHP"],
+  matlab: ["MATLAB", "C++"],
+};
+
 export const COPY: Record<Lang, Copy> = {
   es: {
     meta: {
       title: "Pau Sevilla · Desarrollador full-stack y móvil",
       description:
-        "Desarrollador full-stack y móvil en el inLab FIB (UPC) y estudiante de Ingeniería Informática en la FIB. Apps publicadas en App Store y Google Play; Vademecum supera las 10.000 descargas.",
+        "Pau Sevilla, desarrollador full-stack y móvil en el inLab FIB (UPC) y estudiante de Ingeniería Informática en la FIB. Ha publicado seis apps y webs; Vademecum pasa de 10.000 descargas en Google Play.",
     },
     nav: { projects: "Proyectos", experience: "Experiencia", about: "Sobre mí", contact: "Contacto" },
     skip: "Saltar al contenido",
     hero: {
-      badge: "Disponible para trabajar",
-      role: "Desarrollador full-stack y móvil",
+      kicker: "Pau Sevilla · Barcelona",
+      headline: "Hago apps móviles y webs.",
       summary:
-        "Estudio cuarto de Ingeniería Informática en la FIB y desde diciembre de 2024 trabajo en el inLab FIB, en webs para la universidad y en código C++ de grupos de investigación. Por mi cuenta hago y publico mis propias apps.",
-      ctaProjects: "Ver proyectos",
-      ctaContact: "Escríbeme",
+        "Estudio cuarto de Ingeniería Informática en la FIB y desde diciembre de 2024 trabajo en el inLab FIB, en webs para la universidad y en código C++ de grupos de investigación. Por mi cuenta hago apps y las publico; Vademecum pasa de 10.000 descargas en Google Play.",
+      cta: "Escríbeme",
       photoAlt: "Foto de Pau Sevilla",
     },
-    stats: [
-      { value: "10.000+", label: "descargas de Vademecum en Google Play" },
-      { value: "6", label: "productos publicados" },
-      { value: "2024", label: "en el inLab FIB desde diciembre" },
-    ],
     projects: {
       title: "Proyectos propios",
-      intro: "Apps y webs que he diseñado, programado y publicado.",
+      intro: "Apps y webs mías que puedes descargar o visitar.",
       appstore: "App Store",
       googleplay: "Google Play",
-      web: "Visitar web",
+      web: "Visitar la web",
     },
     experience: {
       title: "Experiencia",
       org: "inLab FIB (UPC)",
-      role: "Desarrollador full-stack y de computación · colaborador en formación",
-      date: "Dic. 2024 – actualidad",
-      place: "Barcelona",
+      role: "Desarrollador full-stack y de computación (colaborador en formación)",
+      date: "Barcelona · desde diciembre de 2024",
+      now: "Ahora",
       items: [
         {
-          title: "TurnItOn",
-          stack: "Angular · Laravel",
-          text: "Hice el frontend y el backend de la nueva web del laboratorio para encender ordenadores a distancia y conectarse a ellos. Sustituye a una herramienta que se había quedado muy anticuada.",
+          title: "Librería del LaCàN",
+          stack: EXP_STACK.lacan,
+          now: true,
+          text: "Llevo el refactor de la librería open source de ingeniería computacional del LaCàN, que empezó en MATLAB, hacia C++ moderno con bindings de Python y tests. El frontend y el backend los hace otro equipo.",
         },
         {
           title: "Portal HPC para el grupo BIT de la Escola de Camins",
-          stack: "Angular · Node.js · Slurm",
-          text: "Dentro del proyecto europeo E-Med: una web desde la que el grupo envía trabajos Slurm a su servidor. Programé el frontend, el backend y la cola de ejecución.",
+          stack: EXP_STACK.hpc,
+          text: "Para el proyecto europeo E-Med hice una web desde la que el grupo manda trabajos Slurm a su servidor. Me encargué del frontend, del backend y de la cola de ejecución.",
+        },
+        {
+          title: "TurnItOn",
+          stack: EXP_STACK.turniton,
+          text: "Hice el frontend y el backend de la nueva web del laboratorio para encender ordenadores a distancia y conectarse a ellos. Sustituye a la herramienta antigua.",
         },
         {
           title: "De MATLAB a C++",
-          stack: "MATLAB · C++",
-          text: "Durante dos cuatrimestres pasé a C++ un código de MATLAB y lo optimicé; cambié sus estructuras de datos para que consuman menos memoria.",
-        },
-        {
-          title: "Librería del LaCàN",
-          stack: "C++ · Python",
-          text: "Ahora llevo el refactor de su librería open source de ingeniería computacional, que viene de MATLAB: C++ moderno, bindings de Python y tests. El frontend y el backend son de otro equipo.",
+          stack: EXP_STACK.matlab,
+          text: "Durante dos cuatrimestres pasé a C++ un código de MATLAB y lo optimicé; cambié sus estructuras de datos para que consumieran menos memoria.",
         },
       ],
-    },
-    ai: {
-      title: "Desarrollo con IA",
-      text: "Desde hace un año desarrollo con agentes de IA (Claude Code y Codex) de forma supervisada: defino qué se hace, reviso el código que generan y todo pasa tests antes de publicarse. También integro modelos de IA en producto, como el asistente de Manipulador Hoy con la API de Claude.",
     },
     about: {
       title: "Sobre mí",
       text: "Programo desde los 14 años. Vivo en Barcelona y, fuera del código, soy monitor en el Agrupament Escolta Albada de Rubí; este es mi tercer curso.",
+      aiTitle: "Cómo uso la IA",
+      aiText:
+        "Desde hace un año programo con agentes de IA, Claude Code y Codex. Yo decido qué se hace, reviso el código que escriben y nada se publica sin pasar los tests. También he integrado IA en mis productos; por ejemplo, el asistente de Manipulador Hoy usa la API de Claude.",
       educationTitle: "Formación",
       education: [
         { title: "Grado en Ingeniería Informática", detail: "FIB, UPC · cuarto curso", date: "2023 – hoy" },
@@ -331,6 +339,7 @@ export const COPY: Record<Lang, Copy> = {
     },
     skills: {
       title: "Habilidades",
+      note: "En negrita, lo que aparece en los proyectos y la experiencia de esta página.",
       groups: [
         { name: "Lenguajes", items: SKILLS_ITEMS.languages },
         { name: "Frameworks", items: SKILLS_ITEMS.frameworks },
@@ -340,36 +349,31 @@ export const COPY: Record<Lang, Copy> = {
     },
     contact: {
       title: "Contacto",
-      text: "Si quieres hablar de un proyecto o de una oferta, escríbeme.",
-      emailLabel: "Enviar un correo",
+      available: "Estoy disponible para trabajar.",
+      text: "Para proyectos u ofertas, escríbeme al correo:",
+      elsewhere: "También estoy en",
     },
-    footer: "Hecho con Astro por Pau Sevilla.",
+    footer: "Web hecha con Astro.",
   },
   en: {
     meta: {
       title: "Pau Sevilla · Full-stack and mobile developer",
       description:
-        "Full-stack and mobile developer at inLab FIB (UPC) and Computer Engineering student at FIB. Apps published on the App Store and Google Play; Vademecum has over 10,000 downloads.",
+        "Pau Sevilla, full-stack and mobile developer at inLab FIB (UPC) and Computer Engineering student at FIB. Six apps and websites published; Vademecum has over 10,000 downloads on Google Play.",
     },
     nav: { projects: "Projects", experience: "Experience", about: "About", contact: "Contact" },
     skip: "Skip to content",
     hero: {
-      badge: "Available for work",
-      role: "Full-stack and mobile developer",
+      kicker: "Pau Sevilla · Barcelona",
+      headline: "I build mobile apps and websites.",
       summary:
-        "I'm in my fourth year of Computer Engineering at FIB and, since December 2024, I've been working at inLab FIB on web apps for the university and on C++ code for research groups. On my own, I build and publish my own apps.",
-      ctaProjects: "See projects",
-      ctaContact: "Get in touch",
+        "I'm in my fourth year of Computer Engineering at FIB and, since December 2024, I've worked at inLab FIB on web apps for the university and on C++ code for research groups. I also build and ship my own apps; Vademecum has over 10,000 downloads on Google Play.",
+      cta: "Get in touch",
       photoAlt: "Photo of Pau Sevilla",
     },
-    stats: [
-      { value: "10,000+", label: "Vademecum downloads on Google Play" },
-      { value: "6", label: "products published" },
-      { value: "2024", label: "at inLab FIB since December" },
-    ],
     projects: {
-      title: "Own projects",
-      intro: "Apps and websites I have designed, built and published.",
+      title: "Personal projects",
+      intro: "Apps and websites of mine you can download or visit.",
       appstore: "App Store",
       googleplay: "Google Play",
       web: "Visit site",
@@ -377,49 +381,50 @@ export const COPY: Record<Lang, Copy> = {
     experience: {
       title: "Experience",
       org: "inLab FIB (UPC)",
-      role: "Full-stack and computing developer · trainee collaborator",
-      date: "Dec 2024 – present",
-      place: "Barcelona",
+      role: "Trainee developer · full-stack and C++",
+      date: "Barcelona · since December 2024",
+      now: "Now",
       items: [
         {
-          title: "TurnItOn",
-          stack: "Angular · Laravel",
-          text: "I built the frontend and backend of the lab's new web app for switching computers on remotely and connecting to them. It replaces a tool that had become badly outdated.",
+          title: "LaCàN library",
+          stack: EXP_STACK.lacan,
+          now: true,
+          text: "I'm in charge of refactoring LaCàN's open-source computational engineering library, which started out in MATLAB, into modern C++ with Python bindings and tests. Another team builds the frontend and backend.",
         },
         {
           title: "HPC portal for the BIT group at the Barcelona School of Civil Engineering",
-          stack: "Angular · Node.js · Slurm",
-          text: "Part of the European E-Med project: a web app from which the group submits Slurm jobs to its server. I wrote the frontend, the backend and the execution queue.",
+          stack: EXP_STACK.hpc,
+          text: "For the European E-Med project I built a web app from which the group sends Slurm jobs to its server. I handled the frontend, the backend and the execution queue.",
+        },
+        {
+          title: "TurnItOn",
+          stack: EXP_STACK.turniton,
+          text: "I built the frontend and backend of the lab's new web app for switching computers on remotely and connecting to them. It replaces the old tool.",
         },
         {
           title: "From MATLAB to C++",
-          stack: "MATLAB · C++",
-          text: "Over two semesters I ported MATLAB code to C++ and optimised it, changing its data structures so they use less memory.",
-        },
-        {
-          title: "LaCàN library",
-          stack: "C++ · Python",
-          text: "I'm now leading the refactor of their open-source computational engineering library, which started out in MATLAB: modern C++, Python bindings and tests. Another team handles the frontend and backend.",
+          stack: EXP_STACK.matlab,
+          text: "Over two semesters I ported MATLAB code to C++ and optimised it, changing its data structures so they used less memory.",
         },
       ],
     },
-    ai: {
-      title: "Building with AI",
-      text: "For the past year I've been developing with AI agents (Claude Code and Codex) under supervision: I decide what gets built, review the code they generate, and everything passes tests before it ships. I also integrate AI models into products, like the Manipulador Hoy assistant built on the Claude API.",
-    },
     about: {
       title: "About",
-      text: "I've been coding since I was 14. I live in Barcelona and, away from code, I'm a leader at the Agrupament Escolta Albada scout group in Rubí, now in my third year.",
+      text: "I've been coding since I was 14. I live in Barcelona and, away from code, I'm a scout leader with the Agrupament Escolta Albada in Rubí, now in my third year.",
+      aiTitle: "How I use AI",
+      aiText:
+        "For the past year I've been coding with AI agents, Claude Code and Codex. I decide what gets built, review the code they write, and nothing ships without passing the tests. I've also built AI into my products; for example, the Manipulador Hoy assistant runs on the Claude API.",
       educationTitle: "Education",
       education: [
         { title: "BSc in Computer Engineering", detail: "FIB, UPC · fourth year", date: "2023 – present" },
         { title: "Technology Baccalaureate", detail: "Maristes Rubí · research project on facial recognition with AI", date: "2021 – 2023" },
       ],
       languagesTitle: "Languages",
-      languages: "Native Catalan and Spanish; intermediate English.",
+      languages: "Catalan and Spanish (native), English (intermediate).",
     },
     skills: {
       title: "Skills",
+      note: "In bold, what appears in the projects and experience on this page.",
       groups: [
         { name: "Languages", items: SKILLS_ITEMS.languages },
         { name: "Frameworks", items: SKILLS_ITEMS.frameworks },
@@ -429,76 +434,71 @@ export const COPY: Record<Lang, Copy> = {
     },
     contact: {
       title: "Contact",
-      text: "If you'd like to talk about a project or a job, drop me a line.",
-      emailLabel: "Send an email",
+      available: "I'm available for work.",
+      text: "For projects or job offers, email me at:",
+      elsewhere: "You can also find me on",
     },
-    footer: "Built with Astro by Pau Sevilla.",
+    footer: "Built with Astro.",
   },
   ca: {
     meta: {
       title: "Pau Sevilla · Desenvolupador full-stack i mòbil",
       description:
-        "Desenvolupador full-stack i mòbil a l'inLab FIB (UPC) i estudiant d'Enginyeria Informàtica a la FIB. Apps publicades a l'App Store i Google Play; Vademecum supera les 10.000 descàrregues.",
+        "Pau Sevilla, desenvolupador full-stack i mòbil a l'inLab FIB (UPC) i estudiant d'Enginyeria Informàtica a la FIB. Ha publicat sis apps i webs; Vademecum supera les 10.000 descàrregues a Google Play.",
     },
     nav: { projects: "Projectes", experience: "Experiència", about: "Sobre mi", contact: "Contacte" },
     skip: "Salta al contingut",
     hero: {
-      badge: "Disponible per treballar",
-      role: "Desenvolupador full-stack i mòbil",
+      kicker: "Pau Sevilla · Barcelona",
+      headline: "Faig apps mòbils i webs.",
       summary:
-        "Estudio quart d'Enginyeria Informàtica a la FIB i des del desembre de 2024 treballo a l'inLab FIB, en webs per a la universitat i en codi C++ de grups de recerca. Pel meu compte faig i publico les meves pròpies apps.",
-      ctaProjects: "Veure projectes",
-      ctaContact: "Escriu-me",
+        "Estudio quart d'Enginyeria Informàtica a la FIB i des del desembre de 2024 treballo a l'inLab FIB, en webs per a la universitat i en codi C++ de grups de recerca. Pel meu compte faig apps i les publico; Vademecum supera les 10.000 descàrregues a Google Play.",
+      cta: "Escriu-me",
       photoAlt: "Foto de Pau Sevilla",
     },
-    stats: [
-      { value: "10.000+", label: "descàrregues de Vademecum a Google Play" },
-      { value: "6", label: "productes publicats" },
-      { value: "2024", label: "a l'inLab FIB des de desembre" },
-    ],
     projects: {
       title: "Projectes propis",
-      intro: "Apps i webs que he dissenyat, programat i publicat.",
+      intro: "Apps i webs meves que pots descarregar o visitar.",
       appstore: "App Store",
       googleplay: "Google Play",
-      web: "Visitar el web",
+      web: "Visitar la web",
     },
     experience: {
       title: "Experiència",
       org: "inLab FIB (UPC)",
-      role: "Desenvolupador full-stack i de computació · col·laborador en formació",
-      date: "Des. 2024 – actualitat",
-      place: "Barcelona",
+      role: "Desenvolupador full-stack i de computació (col·laborador en formació)",
+      date: "Barcelona · des del desembre de 2024",
+      now: "Ara",
       items: [
         {
-          title: "TurnItOn",
-          stack: "Angular · Laravel",
-          text: "Vaig fer el frontend i el backend del nou web del laboratori per encendre ordinadors a distància i connectar-s'hi. Substitueix una eina que s'havia quedat molt antiquada.",
+          title: "Biblioteca del LaCàN",
+          stack: EXP_STACK.lacan,
+          now: true,
+          text: "M'encarrego de la refactorització de la biblioteca open source d'enginyeria computacional del LaCàN, que va començar en MATLAB, cap a C++ modern amb bindings de Python i tests. El frontend i el backend els fa un altre equip.",
         },
         {
           title: "Portal HPC per al grup BIT de l'Escola de Camins",
-          stack: "Angular · Node.js · Slurm",
-          text: "Dins del projecte europeu E-Med: un web des del qual el grup envia treballs Slurm al seu servidor. Vaig programar el frontend, el backend i la cua d'execució.",
+          stack: EXP_STACK.hpc,
+          text: "Per al projecte europeu E-Med vaig fer una web des de la qual el grup envia treballs Slurm al seu servidor. Em vaig encarregar del frontend, del backend i de la cua d'execució.",
+        },
+        {
+          title: "TurnItOn",
+          stack: EXP_STACK.turniton,
+          text: "Vaig fer el frontend i el backend de la nova web del laboratori per encendre ordinadors a distància i connectar-s'hi. Substitueix l'eina antiga.",
         },
         {
           title: "De MATLAB a C++",
-          stack: "MATLAB · C++",
-          text: "Durant dos quadrimestres vaig passar a C++ un codi de MATLAB i el vaig optimitzar; vaig canviar-ne les estructures de dades perquè consumeixin menys memòria.",
-        },
-        {
-          title: "Llibreria del LaCàN",
-          stack: "C++ · Python",
-          text: "Ara porto el refactor de la seva llibreria open source d'enginyeria computacional, que ve de MATLAB: C++ modern, bindings de Python i tests. El frontend i el backend són d'un altre equip.",
+          stack: EXP_STACK.matlab,
+          text: "Durant dos quadrimestres vaig passar a C++ un codi de MATLAB i el vaig optimitzar; vaig canviar-ne les estructures de dades perquè consumissin menys memòria.",
         },
       ],
-    },
-    ai: {
-      title: "Desenvolupament amb IA",
-      text: "Des de fa un any desenvolupo amb agents d'IA (Claude Code i Codex) de manera supervisada: defineixo què es fa, reviso el codi que generen i tot passa tests abans de publicar-se. També integro models d'IA en producte, com l'assistent de Manipulador Hoy amb l'API de Claude.",
     },
     about: {
       title: "Sobre mi",
       text: "Programo des dels 14 anys. Visc a Barcelona i, fora del codi, soc monitor a l'Agrupament Escolta Albada de Rubí; aquest és el meu tercer curs.",
+      aiTitle: "Com faig servir la IA",
+      aiText:
+        "Des de fa un any programo amb agents d'IA, Claude Code i Codex. Jo decideixo què es fa, reviso el codi que escriuen i no es publica res sense passar els tests. També he integrat IA en els meus productes; per exemple, l'assistent de Manipulador Hoy fa servir l'API de Claude.",
       educationTitle: "Formació",
       education: [
         { title: "Grau en Enginyeria Informàtica", detail: "FIB, UPC · quart curs", date: "2023 – avui" },
@@ -509,6 +509,7 @@ export const COPY: Record<Lang, Copy> = {
     },
     skills: {
       title: "Habilitats",
+      note: "En negreta, el que apareix als projectes i a l'experiència d'aquesta pàgina.",
       groups: [
         { name: "Llenguatges", items: SKILLS_ITEMS.languages },
         { name: "Frameworks", items: SKILLS_ITEMS.frameworks },
@@ -518,9 +519,22 @@ export const COPY: Record<Lang, Copy> = {
     },
     contact: {
       title: "Contacte",
-      text: "Si vols parlar d'un projecte o d'una oferta, escriu-me.",
-      emailLabel: "Enviar un correu",
+      available: "Estic disponible per treballar.",
+      text: "Per a projectes o ofertes, escriu-me al correu:",
+      elsewhere: "També em trobaràs a",
     },
-    footer: "Fet amb Astro per Pau Sevilla.",
+    footer: "Web feta amb Astro.",
   },
 };
+
+/** Tecnologías que aparecen en algún proyecto o en la experiencia. */
+export const USED_TECH: Set<string> = new Set([
+  ...PROJECTS.flatMap((p) => p.stack),
+  ...Object.values(EXP_STACK).flat(),
+]);
+
+export function isUsed(skill: string): boolean {
+  if (USED_TECH.has(skill)) return true;
+  // «React Native (Expo)» cuenta si aparece React Native o Expo
+  return [...USED_TECH].some((t) => skill.includes(t) && t.length > 2 && skill.startsWith(t));
+}

@@ -1,17 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
-import LinkedinIcon from "@icons/LinkedinIcon.astro";
-import GitHubIcon from "@icons/GitHubIcon.astro";
-import InstagramIcon from "@icons/InstagramIcon.astro";
-import XIcon from "@icons/XIcon.astro";
-import MailIcon from "@icons/MailIcon.astro";
-import AppStoreIcon from "@icons/AppStoreIcon.astro";
-import GooglePlayIcon from "@icons/GooglePlayIcon.astro";
-import ExternalLinkIcon from "@icons/ExternalLinkIcon.astro";
 import photo from "@/assets/pau.jpg";
 import { type Lang } from "@/i18n";
-import { COPY, CONTACT, PROJECTS, type LinkKind } from "@data/site";
+import { COPY, CONTACT, PROJECTS, isUsed, type LinkKind } from "@data/site";
 
 interface Props {
   lang: Lang;
@@ -24,12 +16,11 @@ const linkLabel: Record<LinkKind, string> = {
   googleplay: c.projects.googleplay,
   web: c.projects.web,
 };
-const linkIcon = { appstore: AppStoreIcon, googleplay: GooglePlayIcon, web: ExternalLinkIcon };
 const socials = [
-  { href: CONTACT.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
-  { href: CONTACT.github, label: "GitHub", Icon: GitHubIcon },
-  { href: CONTACT.instagram, label: "Instagram", Icon: InstagramIcon },
-  { href: CONTACT.x, label: "X", Icon: XIcon },
+  { href: CONTACT.linkedin, label: "LinkedIn" },
+  { href: CONTACT.github, label: "GitHub" },
+  { href: CONTACT.instagram, label: "Instagram" },
+  { href: CONTACT.x, label: "X" },
 ];
 ---
 
@@ -38,45 +29,20 @@ const socials = [
     <!-- Portada -->
     <section class="hero wrap" aria-labelledby="titulo">
       <div class="hero-text">
-        <p class="badge"><span class="dot" aria-hidden="true"></span>{c.hero.badge}</p>
-        <h1 id="titulo">Pau Sevilla</h1>
-        <p class="role">{c.hero.role}</p>
+        <p class="kicker">{c.hero.kicker}</p>
+        <h1 id="titulo">{c.hero.headline}</h1>
         <p class="summary">{c.hero.summary}</p>
-        <div class="ctas">
-          <a class="btn primary" href="#proyectos">{c.hero.ctaProjects}</a>
-          <a class="btn" href={`mailto:${CONTACT.email}`}>{c.hero.ctaContact}</a>
-        </div>
-        <ul class="socials">
-          {socials.map(({ href, label, Icon }) => (
-            <li>
-              <a href={href} target="_blank" rel="noopener" aria-label={label} title={label}>
-                <Icon class="icon" />
-              </a>
-            </li>
-          ))}
-        </ul>
+        <a class="cta" href="#contacto">{c.hero.cta} <span aria-hidden="true">→</span></a>
       </div>
       <Image
         src={photo}
         alt={c.hero.photoAlt}
         widths={[240, 400, 640]}
-        sizes="(min-width: 768px) 300px, 180px"
+        sizes="(min-width: 768px) 280px, 112px"
         class="portrait"
         loading="eager"
         fetchpriority="high"
       />
-    </section>
-
-    <!-- Cifras -->
-    <section class="wrap" aria-label="Datos">
-      <dl class="stats">
-        {c.stats.map((s) => (
-          <div>
-            <dt>{s.label}</dt>
-            <dd>{s.value}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
 
     <!-- Proyectos -->
@@ -89,32 +55,24 @@ const socials = [
         {PROJECTS.map((p) => {
           const t = p.text[lang];
           return (
-            <li class="card">
-              <div class={`shot ${p.shot}`}>
-                <Image src={p.image} alt={t.imageAlt} widths={[280, 420, 560]} sizes="(min-width: 768px) 260px, 60vw" loading="lazy" />
+            <li id={p.id} class:list={["proj", { featured: p.featured }]} style={`--tint:${p.tint}`}>
+              <div class={`thumb ${p.shot}`}>
+                <Image src={p.image} alt={t.imageAlt} widths={[200, 360, 560]} sizes="(min-width: 768px) 300px, 96px" loading="lazy" />
               </div>
-              <div class="card-body">
-                <div class="card-top">
-                  <h3>{p.name}</h3>
-                  <span class="year">{p.year}</span>
-                </div>
+              <div class="proj-body">
+                <h3>{p.name} <span class="year">{p.year}</span></h3>
                 {t.metric && <p class="metric">{t.metric}</p>}
-                <p class="card-text">{t.summary}</p>
-                <p class="stack">{p.stack.join(" · ")}</p>
-                <ul class="links">
-                  {p.links.map((l) => {
-                    const Icon = linkIcon[l.kind];
-                    return (
-                      <li>
-                        <a href={l.url} target="_blank" rel="noopener">
-                          <Icon class="icon-sm" />
-                          {linkLabel[l.kind]}
-                          <span class="sr-only"> · {p.name}</span>
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
+                {t.metricNote && <p class="metric-note">{t.metricNote}</p>}
+                <p class="proj-text">{t.summary}</p>
+                <p class="stack">{p.stack.join(", ")}</p>
+                <p class="links">
+                  {p.links.map((l) => (
+                    <a href={l.url} target="_blank" rel="noopener">
+                      {linkLabel[l.kind]}<span aria-hidden="true"> ↗</span>
+                      <span class="sr-only"> ({p.name})</span>
+                    </a>
+                  ))}
+                </p>
               </div>
             </li>
           );
@@ -126,60 +84,63 @@ const socials = [
     <section id="experiencia" class="wrap block" aria-labelledby="h-exp">
       <header class="block-head">
         <h2 id="h-exp">{c.experience.title}</h2>
+        <p>
+          <a class="org" href="https://inlab.fib.upc.edu/" target="_blank" rel="noopener">{c.experience.org}</a>
+          · {c.experience.role}
+        </p>
+        <p class="muted">{c.experience.date}</p>
       </header>
-      <article class="job">
-        <div class="job-head">
-          <div>
-            <h3><a href="https://inlab.fib.upc.edu/" target="_blank" rel="noopener">{c.experience.org}</a></h3>
-            <p class="job-role">{c.experience.role}</p>
-          </div>
-          <p class="job-date">{c.experience.date} · {c.experience.place}</p>
-        </div>
-        <ul class="job-items">
-          {c.experience.items.map((it) => (
-            <li>
-              <h4>{it.title}</h4>
-              <p>{it.text}</p>
-              <p class="stack">{it.stack}</p>
-            </li>
-          ))}
-        </ul>
-      </article>
+      <ol class="jobs">
+        {c.experience.items.map((it) => (
+          <li>
+            <div class="job-side">
+              <h3>{it.title}</h3>
+              {it.now && <span class="now">{c.experience.now}</span>}
+              <p class="stack">{it.stack.join(", ")}</p>
+            </div>
+            <p class="job-text">{it.text}</p>
+          </li>
+        ))}
+      </ol>
     </section>
 
-    <!-- IA -->
-    <section class="wrap block" aria-labelledby="h-ia">
-      <div class="callout">
-        <h2 id="h-ia">{c.ai.title}</h2>
-        <p>{c.ai.text}</p>
-      </div>
-    </section>
-
-    <!-- Sobre mí, formación, habilidades -->
-    <section id="sobre-mi" class="wrap block two" aria-labelledby="h-about">
-      <div>
+    <!-- Sobre mí y habilidades -->
+    <section id="sobre-mi" class="wrap block about" aria-labelledby="h-about">
+      <div class="about-main">
         <h2 id="h-about">{c.about.title}</h2>
-        <p>{c.about.text}</p>
-        <h3 class="sub">{c.about.educationTitle}</h3>
+        <p class="lead">{c.about.text}</p>
+
+        <h3>{c.about.aiTitle}</h3>
+        <p>{c.about.aiText.split("Manipulador Hoy")[0]}<a href="#manipulador">Manipulador Hoy</a>{c.about.aiText.split("Manipulador Hoy")[1] ?? ""}</p>
+
+        <h3>{c.about.educationTitle}</h3>
         <ul class="edu">
           {c.about.education.map((e) => (
             <li>
-              <div class="edu-top"><strong>{e.title}</strong><span>{e.date}</span></div>
-              <p>{e.detail}</p>
+              <span class="edu-date">{e.date}</span>
+              <span><strong>{e.title}</strong><br /><span class="muted">{e.detail}</span></span>
             </li>
           ))}
         </ul>
-        <h3 class="sub">{c.about.languagesTitle}</h3>
+
+        <h3>{c.about.languagesTitle}</h3>
         <p>{c.about.languages}</p>
       </div>
-      <div>
+
+      <div class="about-skills">
         <h2>{c.skills.title}</h2>
+        <p class="muted small">{c.skills.note}</p>
         <dl class="skills">
           {c.skills.groups.map((g) => (
             <div>
               <dt>{g.name}</dt>
               <dd>
-                <ul class="chips">{g.items.map((i) => <li>{i}</li>)}</ul>
+                {g.items.map((i, idx) => (
+                  <>
+                    {isUsed(i) ? <strong>{i}</strong> : <span class="muted">{i}</span>}
+                    {idx < g.items.length - 1 ? ", " : ""}
+                  </>
+                ))}
               </dd>
             </div>
           ))}
@@ -188,171 +149,148 @@ const socials = [
     </section>
 
     <!-- Contacto -->
-    <section id="contacto" class="wrap block" aria-labelledby="h-contact">
-      <div class="contact">
-        <h2 id="h-contact">{c.contact.title}</h2>
-        <p>{c.contact.text}</p>
-        <a class="btn primary big" href={`mailto:${CONTACT.email}`}>
-          <MailIcon class="icon-sm" />
-          {CONTACT.email}
-        </a>
-        <ul class="socials center">
-          {socials.map(({ href, label, Icon }) => (
-            <li>
-              <a href={href} target="_blank" rel="noopener" aria-label={label} title={label}>
-                <Icon class="icon" />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <section id="contacto" class="wrap block contact" aria-labelledby="h-contact">
+      <h2 id="h-contact">{c.contact.title}</h2>
+      <p class="lead"><span class="available">{c.contact.available}</span> {c.contact.text}</p>
+      <a class="email" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+      <p class="elsewhere">
+        {c.contact.elsewhere}{" "}
+        {socials.map((s, i) => (
+          <>
+            <a href={s.href} target="_blank" rel="noopener">{s.label}</a>{i < socials.length - 1 ? ", " : "."}
+          </>
+        ))}
+      </p>
     </section>
   </main>
 </Layout>
 
 <style>
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .muted { color: var(--muted); }
+  .small { font-size: 0.92rem; }
+
+  h2 { font-size: clamp(1.9rem, 6vw, 2.6rem); margin: 0; }
+  h3 { font-size: 1.3rem; margin: 0; }
 
   /* Portada */
   .hero {
-    display: grid; gap: 1.75rem; align-items: center;
-    padding-block: 2.5rem 1.5rem;
+    display: grid; grid-template-columns: 1fr auto; grid-template-areas: "kick photo" "text text";
+    gap: 1.25rem 1.25rem; align-items: end; padding-block: 2.25rem 0.5rem;
   }
-  .hero-text { order: 2; }
+  .hero-text { display: contents; }
+  .kicker { grid-area: kick; margin: 0; color: var(--muted); font-weight: 600; align-self: end; }
   .portrait {
-    order: 1; width: 132px; height: 132px; object-fit: cover; object-position: 50% 30%;
-    border-radius: 22px; border: 1px solid var(--line);
+    grid-area: photo; width: 112px; height: 132px; object-fit: cover; object-position: 50% 30%;
+    border-radius: 6px; filter: saturate(0.92);
   }
-  .badge {
-    display: inline-flex; align-items: center; gap: 0.5rem; margin: 0 0 1rem;
-    font-size: 0.85rem; font-weight: 700; color: var(--muted);
-    padding: 0.3rem 0.75rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+  h1 {
+    grid-column: 1 / -1; font-size: clamp(2.6rem, 11vw, 5rem); line-height: 1; letter-spacing: -0.025em; margin: 0.25rem 0 0;
   }
-  .dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #1f9d55; }
-  h1 { font-size: clamp(2.4rem, 9vw, 3.6rem); font-weight: 700; margin: 0; }
-  .role { font-family: var(--font-head); font-weight: 500; font-size: clamp(1.1rem, 4vw, 1.35rem); color: var(--accent); margin: 0.35rem 0 1rem; }
-  .summary { color: var(--muted); max-width: 60ch; margin: 0 0 1.5rem; }
-  .ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-    min-height: 48px; padding: 0 1.25rem; border-radius: 12px;
-    font-weight: 700; text-decoration: none; color: var(--ink);
-    border: 1px solid var(--line); background: var(--surface);
-    transition: transform 150ms ease, background-color 150ms ease;
+  .summary { grid-column: 1 / -1; font-size: clamp(1.1rem, 3.6vw, 1.3rem); line-height: 1.55; max-width: 38em; margin: 0; }
+  .cta {
+    grid-column: 1 / -1; justify-self: start; margin-top: 0.4rem;
+    display: inline-flex; align-items: center; gap: 0.4rem; min-height: 48px; padding: 0 1.2rem;
+    background: var(--ink); color: var(--bg); font-weight: 700; text-decoration: none; border-radius: 6px;
   }
-  .btn:hover { background: var(--surface-2); }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-  .btn.primary:hover { transform: translateY(-1px); }
-  .btn.big { font-size: 1.05rem; padding: 0 1.5rem; word-break: break-all; }
-  .socials { display: flex; gap: 0.5rem; list-style: none; margin: 1.25rem 0 0; padding: 0; }
-  .socials.center { justify-content: center; }
-  .socials a {
-    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
-    color: var(--muted); border: 1px solid var(--line); background: var(--surface);
-  }
-  .socials a:hover { color: var(--ink); background: var(--surface-2); }
-  :global(.icon) { width: 20px; height: 20px; }
-  :global(.icon-sm) { width: 18px; height: 18px; flex: none; }
-
-  /* Cifras */
-  .stats {
-    display: grid; margin: 0;
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  }
-  .stats > div {
-    display: flex; flex-direction: row-reverse; justify-content: flex-end; align-items: center; gap: 0.9rem;
-    padding: 0.85rem 1.1rem;
-  }
-  .stats > div + div { border-top: 1px solid var(--line); }
-  .stats dt { color: var(--muted); font-size: 0.95rem; line-height: 1.35; }
-  .stats dd { margin: 0; min-width: 5.2rem; font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; color: var(--accent); }
+  .cta:hover { background: var(--accent); color: var(--accent-ink); }
 
   /* Bloques */
-  .block { padding-top: 3.5rem; }
-  .block-head { margin-bottom: 1.5rem; }
-  .block-head p { color: var(--muted); margin: 0.35rem 0 0; }
-  h2 { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 600; margin: 0; }
+  .block { padding-top: 4rem; }
+  .block-head { margin-bottom: 1.75rem; border-top: 2px solid var(--ink); padding-top: 0.9rem; }
+  .block-head p { margin: 0.5rem 0 0; color: var(--muted); }
+  .org { color: var(--ink); font-weight: 700; text-underline-offset: 4px; }
 
   /* Proyectos */
-  .projects { display: grid; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
-  .card {
-    display: grid; overflow: hidden;
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  .projects { list-style: none; margin: 0; padding: 0; display: grid; }
+  .proj {
+    display: grid; grid-template-columns: 96px 1fr; gap: 1rem;
+    padding-block: 1.4rem; border-bottom: 1px solid var(--line);
   }
-  .shot {
-    display: grid; place-items: end center; padding: 1.5rem 1.5rem 0; background: var(--surface-2);
-    height: 220px; overflow: hidden;
+  .proj:first-child { padding-top: 0.25rem; }
+  .thumb {
+    align-self: start; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 6px;
+    background: color-mix(in srgb, var(--tint) 18%, var(--bg));
   }
-  .shot :global(img) {
-    width: 62%; max-width: 230px; height: auto; display: block;
-    border-radius: 18px 18px 0 0; border: 1px solid var(--line); border-bottom: 0;
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
-  }
-  .shot.web :global(img) { width: 80%; max-width: 300px; border-radius: 12px 12px 0 0; }
-  .card-body { padding: 1.1rem 1.2rem 1.25rem; display: flex; flex-direction: column; gap: 0.55rem; }
-  .card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-  h3 { font-size: 1.2rem; font-weight: 600; margin: 0; }
-  .year { color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
-  .metric { margin: 0; font-weight: 700; color: var(--accent); }
-  .card-text { margin: 0; font-size: 1rem; }
+  .thumb :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .proj-body { display: flex; flex-direction: column; gap: 0.45rem; min-width: 0; }
+  .proj h3 { font-size: 1.45rem; line-height: 1.1; }
+  .year { font-family: var(--font-body); font-size: 0.85rem; color: var(--muted); font-weight: 400; margin-left: 0.3rem; white-space: nowrap; }
+  .metric { margin: 0; font-weight: 700; }
+  .metric-note { margin: -0.3rem 0 0; color: var(--muted); font-size: 0.95rem; }
+  .proj-text { margin: 0; font-size: 1rem; }
   .stack { margin: 0; color: var(--muted); font-size: 0.9rem; }
-  .links { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0.35rem 0 0; padding: 0; }
-  .links a {
-    display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0 0.85rem;
-    border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--ink); font-weight: 700; font-size: 0.92rem;
-  }
-  .links a:hover { background: var(--surface-2); }
+  .links { margin: 0.1rem 0 0; display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+  .links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--ink); text-underline-offset: 4px; text-decoration-color: color-mix(in srgb, var(--ink) 35%, transparent); }
+  .links a:hover { text-decoration-color: var(--ink); }
 
   /* Experiencia */
-  .job { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem; }
-  .job-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1.5rem; margin-bottom: 1rem; }
-  .job-head h3 a { color: var(--ink); text-decoration-color: var(--line); text-underline-offset: 4px; }
-  .job-role, .job-date { margin: 0.2rem 0 0; color: var(--muted); }
-  .job-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
-  .job-items li { padding-left: 1rem; border-left: 3px solid var(--line); }
-  h4 { font-family: var(--font-head); font-size: 1.02rem; font-weight: 600; margin: 0 0 0.2rem; }
-  .job-items p { margin: 0 0 0.2rem; }
+  .jobs { list-style: none; margin: 0; padding: 0; }
+  .jobs li { display: grid; gap: 0.4rem; padding-block: 1.2rem; border-bottom: 1px solid var(--line); }
+  .jobs li:first-child { padding-top: 0.25rem; }
+  .job-side h3 { display: inline; font-size: 1.25rem; }
+  .now {
+    display: inline-block; margin-left: 0.5rem; vertical-align: 0.15em;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .job-side .stack { margin-top: 0.25rem; }
+  .job-text { margin: 0; }
 
-  /* IA */
-  .callout { background: var(--surface-2); border-radius: var(--radius); padding: 1.4rem 1.3rem; }
-  .callout p { margin: 0.6rem 0 0; max-width: 75ch; }
-
-  /* Sobre mí y habilidades */
-  .two { display: grid; gap: 2.5rem; }
-  .two p { margin: 0.6rem 0 0; }
-  .sub { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
-  .edu { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
-  .edu-top { display: flex; justify-content: space-between; gap: 1rem; }
-  .edu-top span { color: var(--muted); white-space: nowrap; font-size: 0.92rem; }
-  .edu p { margin: 0.1rem 0 0; color: var(--muted); }
-  .skills { margin: 0.6rem 0 0; display: grid; gap: 1rem; }
-  .skills dt { font-weight: 700; margin-bottom: 0.4rem; }
-  .skills dd { margin: 0; }
-  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
-  .chips li { padding: 0.3rem 0.65rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 0.92rem; }
+  /* Sobre mí */
+  .about { display: grid; gap: 3rem; }
+  .about-main, .about-skills { border-top: 2px solid var(--ink); padding-top: 0.9rem; }
+  .about h3 { margin: 1.75rem 0 0.4rem; font-size: 1.25rem; }
+  .about p { margin: 0.5rem 0 0; }
+  .lead { font-size: 1.15rem; }
+  .edu { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+  .edu li { display: grid; grid-template-columns: 6.8rem 1fr; gap: 0.75rem; }
+  .edu-date { color: var(--muted); font-size: 0.92rem; padding-top: 0.1rem; font-variant-numeric: tabular-nums; }
+  .skills { margin: 1.1rem 0 0; display: grid; gap: 1rem; }
+  .skills > div { display: grid; gap: 0.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+  .skills dt { font-family: var(--font-head); font-size: 1.15rem; font-weight: 500; }
+  .skills dd { margin: 0; line-height: 1.7; }
+  .skills strong { font-weight: 600; }
 
   /* Contacto */
-  .contact { text-align: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem 1.25rem; }
-  .contact p { color: var(--muted); margin: 0.6rem auto 1.25rem; max-width: 50ch; }
-
-  @media (min-width: 640px) {
-    .stats { grid-template-columns: repeat(3, 1fr); }
-    .stats > div { flex-direction: column-reverse; align-items: flex-start; gap: 0.1rem; padding: 1.1rem 1.25rem; }
-    .stats > div + div { border-top: 0; border-left: 1px solid var(--line); }
-    .stats dd { font-size: 1.85rem; min-width: 0; }
+  .contact { border-top: 2px solid var(--ink); margin-top: 4rem; padding-top: 0.9rem; }
+  .contact .lead { margin: 0.75rem 0 0.5rem; max-width: 36em; }
+  .available { font-weight: 700; }
+  .email {
+    display: inline-block; font-family: var(--font-head); font-weight: 500;
+    font-size: clamp(1.5rem, 6.5vw, 3rem); line-height: 1.15; color: var(--ink);
+    overflow-wrap: anywhere; text-underline-offset: 6px; text-decoration-thickness: 2px;
   }
+  .email:hover { color: var(--accent); }
+  .elsewhere { margin: 1rem 0 0; color: var(--muted); }
+  .elsewhere a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
 
   @media (min-width: 768px) {
-    .hero { grid-template-columns: 1fr auto; gap: 3rem; padding-block: 4.5rem 2.5rem; }
-    .hero-text { order: 1; }
-    .portrait { order: 2; width: 280px; height: 300px; border-radius: 28px; }
-    .projects { grid-template-columns: repeat(2, 1fr); }
-    .card { grid-template-rows: auto 1fr; }
-    .shot { height: 250px; }
-    .two { grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .block { padding-top: 5rem; }
-    .job { padding: 1.75rem; }
-    .job-items { grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+    .hero { grid-template-columns: 1fr 280px; grid-template-areas: "text photo"; gap: 3.5rem; align-items: center; padding-block: 4.5rem 1rem; }
+    .hero-text { display: flex; flex-direction: column; gap: 1.1rem; grid-area: text; }
+    .kicker, h1, .summary, .cta { grid-column: auto; }
+    .kicker { align-self: auto; }
+    .cta { align-self: flex-start; }
+    .portrait { width: 280px; height: 340px; }
+    .block { padding-top: 6rem; }
+
+    .projects { grid-template-columns: repeat(2, 1fr); column-gap: 2.5rem; }
+    .proj { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 1rem; padding-block: 1.75rem; border-bottom: 0; border-top: 1px solid var(--line); }
+    .proj:first-child { padding-top: 1.75rem; }
+    .thumb { aspect-ratio: 4 / 3; display: grid; place-items: end center; padding: 1.5rem 1.5rem 0; }
+    .thumb :global(img) { width: 58%; height: auto; max-height: 100%; object-fit: contain; object-position: bottom; border-radius: 12px 12px 0 0; }
+    .thumb.web :global(img) { width: 78%; border-radius: 8px 8px 0 0; }
+
+    .proj.featured { grid-column: 1 / -1; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: auto; column-gap: 2.5rem; align-items: center; border-top: 0; }
+    .proj.featured .thumb { aspect-ratio: 5 / 4; }
+    .proj.featured .thumb :global(img) { width: 50%; }
+    .proj.featured h3 { font-size: 2rem; }
+    .proj.featured .metric { font-family: var(--font-head); font-weight: 500; font-size: 2.1rem; line-height: 1.1; margin-top: 0.3rem; }
+    .proj.featured .metric-note { margin-top: 0; }
+
+    .jobs li { grid-template-columns: 17rem 1fr; gap: 2.5rem; padding-block: 1.5rem; }
+    .about { grid-template-columns: 1.15fr 1fr; gap: 4rem; }
+    .skills > div { grid-template-columns: 9.5rem 1fr; gap: 1rem; }
   }
 
   @media (min-width: 1100px) {

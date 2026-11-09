@@ -6,7 +6,8 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const langs = Object.keys(LANGUAGES) as Lang[];
+// Orden de lectura: castellano, catalán, inglés
+const langs: Lang[] = ["es", "ca", "en"];
 
 const pathname = Astro.url.pathname;
 const pathWithoutLocale = pathname.replace(/^\/(es|ca)(\/|$)/, "/");
@@ -36,17 +37,14 @@ function getLocalePath(targetLang: Lang): string {
 </ul>
 
 <style>
-  .langs {
-    grid-area: lang;
-    display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0.2rem;
-    border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
-  }
+  .langs { grid-area: lang; display: flex; list-style: none; margin: 0; padding: 0; }
+  li + li::before { content: "/"; color: var(--line); padding-inline: 0.1rem; }
+  li { display: flex; align-items: center; }
   a {
-    display: grid; place-items: center;
-    min-width: 2.5rem; min-height: 2.25rem;
-    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
-    color: var(--muted); text-decoration: none; border-radius: 999px;
+    display: inline-grid; place-items: center; min-width: 2.2rem; min-height: 44px;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--muted); text-decoration: none;
   }
   a:hover { color: var(--ink); }
-  a[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
+  a[aria-current="true"] { color: var(--ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 </style>
