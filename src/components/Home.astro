@@ -35,7 +35,7 @@ const order = ["vademecum", "vademecum-vet", "apto", "manipulador", "parcelario"
 const projects = order.map((id) => PROJECTS.find((p) => p.id === id)!).filter(Boolean);
 const orgBlurb = {
   es: "Laboratorio de innovación e investigación de la Facultat d'Informàtica de Barcelona.",
-  en: "The innovation and research lab of the Barcelona School of Informatics.",
+  en: "The research and innovation lab at the Barcelona School of Informatics (UPC).",
   ca: "Laboratori d'innovació i recerca de la Facultat d'Informàtica de Barcelona.",
 }[lang];
 const pad = (n: number) => String(n).padStart(2, "0");
