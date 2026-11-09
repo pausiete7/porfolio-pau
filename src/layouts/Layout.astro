@@ -1,127 +1,137 @@
 ---
-import "@fontsource-variable/onest";
-import { ViewTransitions } from "astro:transitions";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import { useTranslations, DEFAULT_LANG, type Lang } from "@/i18n";
+import { DEFAULT_LANG, LANGUAGES, type Lang } from "@/i18n";
+import { COPY, CONTACT } from "@data/site";
 
 interface Props {
-  lang?: Lang;
+  lang: Lang;
 }
 
-const lang = (Astro.props.lang ?? Astro.currentLocale ?? DEFAULT_LANG) as Lang;
-const t = useTranslations(lang);
+const { lang } = Astro.props;
+const copy = COPY[lang];
+const site = Astro.site ?? new URL("https://pausevilla.com");
+const langs = Object.keys(LANGUAGES) as Lang[];
+const pathFor = (l: Lang) => (l === DEFAULT_LANG ? "/" : `/${l}/`);
+const canonical = new URL(pathFor(lang), site).href;
+const ogImage = new URL("/og.jpg", site).href;
+const ogLocale = { es: "es_ES", en: "en_US", ca: "ca_ES" }[lang];
+
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Pau Sevilla Rodríguez",
+  url: site.href,
+  image: ogImage,
+  jobTitle: copy.hero.role,
+  email: `mailto:${CONTACT.email}`,
+  address: { "@type": "PostalAddress", addressLocality: "Barcelona", addressCountry: "ES" },
+  worksFor: { "@type": "Organization", name: "inLab FIB", url: "https://inlab.fib.upc.edu/" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Facultat d'Informàtica de Barcelona (UPC)" },
+  sameAs: [CONTACT.linkedin, CONTACT.github, CONTACT.instagram, CONTACT.x],
+};
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content={t("layout.description")}
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
-    <meta name="generator" content={Astro.generator} />
-    <style is:global>
-      html,
-      body {
-        background: #0a0a0f !important;
-        min-height: 100%;
-      }
-    </style>
-    <title>
-      {t("layout.title")}
-    </title>
-    <ViewTransitions />
+    <title>{copy.meta.title}</title>
+    <meta name="description" content={copy.meta.description} />
+    <link rel="canonical" href={canonical} />
+    {langs.map((l) => <link rel="alternate" hreflang={l} href={new URL(pathFor(l), site).href} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL("/", site).href} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101216" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.webp" type="image/webp" />
+    <link rel="preload" href="/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={copy.meta.title} />
+    <meta property="og:description" content={copy.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />
   </head>
-  <body class="relative min-h-screen page-bg">
+  <body>
+    <a class="skip" href="#contenido">{copy.skip}</a>
     <Header lang={lang} />
     <slot />
     <Footer lang={lang} />
-
-    <script>
-      function setupReveal() {
-        const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-              }
-            });
-          },
-          { root: null, rootMargin: '0px', threshold: 0.1 }
-        );
-        revealEls.forEach((el) => observer.observe(el));
-      }
-
-      document.addEventListener('astro:page-load', () => {
-        setupReveal();
-      });
-    </script>
   </body>
 </html>
+
 <style is:global>
+  @font-face { font-family: "Lato"; font-weight: 400; font-display: swap; src: url("/fonts/lato-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Lato"; font-weight: 400; font-style: italic; font-display: swap; src: url("/fonts/lato-latin-400-italic.woff2") format("woff2"); }
+  @font-face { font-family: "Lato"; font-weight: 700; font-display: swap; src: url("/fonts/lato-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 500; font-display: swap; src: url("/fonts/poppins-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 600; font-display: swap; src: url("/fonts/poppins-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 700; font-display: swap; src: url("/fonts/poppins-latin-700-normal.woff2") format("woff2"); }
+
   :root {
-    color-scheme: dark;
-  }
-  html {
-    font-family: "Onest Variable", system-ui, sans-serif;
-    scroll-behavior: smooth;
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --surface-2: #eef1f5;
+    --ink: #14171c;
+    --muted: #535b66;
+    --line: #e2e5ea;
+    --accent: #1f3a5f;
+    --accent-ink: #ffffff;
+    --link: #1d5bbf;
+    --focus: #1d5bbf;
+    --radius: 14px;
+    --max: 1080px;
+    --font-body: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-head: "Poppins", var(--font-body);
+    color-scheme: light dark;
   }
 
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101216;
+      --surface: #171a20;
+      --surface-2: #1e232b;
+      --ink: #e9ebee;
+      --muted: #a2aab5;
+      --line: #2a3039;
+      --accent: #9cc0ff;
+      --accent-ink: #0d1726;
+      --link: #9cc0ff;
+      --focus: #9cc0ff;
+    }
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overscroll-behavior: none;
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+  h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; letter-spacing: -0.01em; }
+  a { color: var(--link); }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(100% - 2.5rem, var(--max)); margin-inline: auto; }
 
-  /* Fondo oscuro: negro → lila. En body para que no lo pise Tailwind preflight */
-  body.page-bg,
-  html {
-    background: radial-gradient(
-      125% 125% at 50% 10%,
-      #000 25%,
-      #6633ee 100%
-    ) !important;
-    background-attachment: fixed !important;
+  .skip {
+    position: absolute; left: 1rem; top: -3rem; z-index: 100;
+    background: var(--accent); color: var(--accent-ink); padding: 0.5rem 0.9rem; border-radius: 8px;
+    text-decoration: none; font-weight: 700;
   }
-
-  /* Scroll reveal animations */
-  .reveal,
-  .reveal-left,
-  .reveal-right,
-  .reveal-scale {
-    opacity: 0;
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-  .reveal { transform: translateY(24px); }
-  .reveal-left { transform: translateX(-24px); }
-  .reveal-right { transform: translateX(24px); }
-  .reveal-scale { transform: scale(0.92); }
-
-  .reveal.in-view,
-  .reveal-left.in-view,
-  .reveal-right.in-view,
-  .reveal-scale.in-view {
-    opacity: 1;
-    transform: translate(0) scale(1);
-  }
+  .skip:focus { top: 1rem; }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    .reveal,
-    .reveal-left,
-    .reveal-right,
-    .reveal-scale {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>

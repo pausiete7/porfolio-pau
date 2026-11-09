@@ -7,7 +7,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const langs = Object.keys(LANGUAGES) as Lang[];
-const activeIndex = langs.indexOf(lang);
 
 const pathname = Astro.url.pathname;
 const pathWithoutLocale = pathname.replace(/^\/(es|ca)(\/|$)/, "/");
@@ -18,27 +17,36 @@ function getLocalePath(targetLang: Lang): string {
 }
 ---
 
-<div
-  class="lang-switcher relative flex items-center rounded-full bg-gray-800/90"
-  transition:name="lang-switcher"
-  transition:animate="none"
->
-  <span
-    class="absolute rounded-full bg-blue-500"
-    transition:name="lang-slider"
-    style={`width:2rem;height:1.75rem;left:${activeIndex * 2}rem`}
-  />
+<ul class="langs" aria-label="Idioma / Language">
   {
     langs.map((code) => (
-      <a
-        href={getLocalePath(code)}
-        class:list={[
-          "relative z-10 w-8 h-7 flex items-center justify-center text-xs font-semibold uppercase transition-colors duration-200",
-          code === lang ? "text-white" : "text-gray-400 hover:text-gray-200",
-        ]}
-      >
-        {code}
-      </a>
+      <li>
+        <a
+          href={getLocalePath(code)}
+          hreflang={code}
+          lang={code}
+          aria-current={code === lang ? "true" : undefined}
+          title={LANGUAGES[code]}
+        >
+          {code.toUpperCase()}
+        </a>
+      </li>
     ))
   }
-</div>
+</ul>
+
+<style>
+  .langs {
+    grid-area: lang;
+    display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0.2rem;
+    border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+  }
+  a {
+    display: grid; place-items: center;
+    min-width: 2.5rem; min-height: 2.25rem;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--muted); text-decoration: none; border-radius: 999px;
+  }
+  a:hover { color: var(--ink); }
+  a[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
+</style>

@@ -1,173 +1,72 @@
 ---
 import LanguageSwitcher from "@components/LanguageSwitcher.astro";
-import ProfileIcon from "@icons/ProfileIcon.astro";
-import BriefcaseIcon from "@icons/BriefcaseIcon.astro";
-import BooksIcon from "@icons/BooksIcon.astro";
-import CodeIcon from "@icons/CodeIcon.astro";
-import BrainIcon from "@icons/BrainIcon.astro";
-import { useTranslations, DEFAULT_LANG, type Lang } from "@/i18n";
+import { DEFAULT_LANG, type Lang } from "@/i18n";
+import { COPY } from "@data/site";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t = useTranslations(lang);
-const prefix = lang === DEFAULT_LANG ? "" : `/${lang}`;
-
-const NAV_ITEMS = [
-  {
-    title: t("nav.about"),
-    label: "sobre-mi",
-    url: `${prefix}/#sobre-mi`,
-    icon: ProfileIcon,
-  },
-  {
-    title: t("nav.experience"),
-    label: "experiencia",
-    url: `${prefix}/#experiencia`,
-    icon: BriefcaseIcon,
-  },
-  {
-    title: t("nav.education"),
-    label: "educacion",
-    url: `${prefix}/#educacion`,
-    icon: BooksIcon,
-  },
-  {
-    title: t("nav.projects"),
-    label: "proyectos",
-    url: `${prefix}/#proyectos`,
-    icon: CodeIcon,
-  },
-  {
-    title: t("nav.skills"),
-    label: "habilidades",
-    url: `${prefix}/#habilidades`,
-    icon: BrainIcon,
-  },
+const nav = COPY[lang].nav;
+const home = lang === DEFAULT_LANG ? "/" : `/${lang}/`;
+const links = [
+  { href: "#proyectos", label: nav.projects },
+  { href: "#experiencia", label: nav.experience },
+  { href: "#sobre-mi", label: nav.about },
+  { href: "#contacto", label: nav.contact },
 ];
 ---
 
-<header
-  class="fixed top-0 z-10 w-full mt-2"
->
-  <div class="max-w-xl lg:max-w-4xl mx-auto px-2 md:px-4 flex items-center justify-between">
-    <div class="w-24 shrink-0 hidden lg:block" aria-hidden="true" />
-    <nav
-      class="flex px-2 lg:px-3 text-sm lg:text-base font-medium rounded-full text-gray-200 justify-center items-center"
-    >
-      {
-        NAV_ITEMS.map((link) => (
-          <a
-            class="relative flex items-center justify-center px-2.5 py-2 lg:px-2 transition hover:text-blue-500 whitespace-nowrap after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:w-0 after:bg-blue-500 after:rounded-full after:transition-all after:duration-300 hover:after:w-full"
-            aria-label={link.label}
-            href={link.url}
-            title={link.title}
-          >
-            <link.icon class="size-5 lg:hidden" />
-            <span class="hidden lg:inline">{link.title}</span>
-          </a>
-        ))
-      }
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href={home}>Pau Sevilla</a>
+    <nav aria-label={lang === "en" ? "Sections" : lang === "ca" ? "Seccions" : "Secciones"}>
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
     </nav>
-    <div class="w-24 shrink-0 flex justify-end">
-      <LanguageSwitcher lang={lang} />
-    </div>
+    <LanguageSwitcher lang={lang} />
   </div>
 </header>
 
-<script>
-  function setupNavHighlight() {
-    const sections = document.querySelectorAll("section[id]");
-    const navItems = document.querySelectorAll("header nav a[aria-label]");
-    const visibleSections = new Set<string>();
-
-    function updateActive() {
-      // Find the section closest to the top of the viewport among visible ones
-      let activeId = "";
-      let minTop = Infinity;
-      visibleSections.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = Math.abs(el.getBoundingClientRect().top);
-          if (top < minTop) {
-            minTop = top;
-            activeId = id;
-          }
-        }
-      });
-      // If scrolled to bottom, activate last section
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
-        const allIds = Array.from(sections).map((s) => s.id).filter(Boolean);
-        activeId = allIds[allIds.length - 1] || activeId;
-      }
-      navItems.forEach((item) => {
-        if (item.getAttribute("aria-label") === activeId) {
-          item.classList.add("text-blue-500");
-        } else {
-          item.classList.remove("text-blue-500");
-        }
-      });
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target.id) {
-            if (entry.isIntersecting) {
-              visibleSections.add(entry.target.id);
-            } else {
-              visibleSections.delete(entry.target.id);
-            }
-          }
-        });
-        updateActive();
-      },
-      { root: null, rootMargin: "0px", threshold: 0.1 },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    window.addEventListener("scroll", updateActive, { passive: true });
-
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect();
-      } else {
-        sections.forEach((section) => observer.observe(section));
-      }
-    };
-
-    return observer;
-  }
-
-  document.addEventListener("astro:page-load", () => {
-    setupNavHighlight();
-  });
-
-  document.addEventListener("astro:after-swap", () => {
-    setupNavHighlight();
-  });
-</script>
-
 <style>
-  nav {
-    animation: nav-shadown 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-
-  nav {
-    @apply bg-gray-800/90;
+  .bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "brand lang" "nav nav";
+    align-items: center;
+    column-gap: 1rem;
+    padding-block: 0.6rem 0;
   }
+  .brand {
+    grid-area: brand;
+    font-family: var(--font-head); font-weight: 600; font-size: 1.05rem;
+    color: var(--ink); text-decoration: none;
+  }
+  nav { grid-area: nav; overflow-x: auto; scrollbar-width: none; margin-inline: -0.5rem; }
+  nav::-webkit-scrollbar { display: none; }
+  ul { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0.35rem 0 0.45rem; }
+  nav a {
+    display: inline-block; white-space: nowrap;
+    padding: 0.45rem 0.6rem; min-height: 44px; box-sizing: border-box; line-height: 1.7;
+    color: var(--muted); text-decoration: none; font-size: 0.95rem; border-radius: 8px;
+  }
+  nav a:hover { color: var(--ink); background: var(--surface-2); }
 
-  @keyframes nav-shadown {
-    0% {
-      @apply bg-gray-800/0;
+  @media (min-width: 768px) {
+    .bar {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: "brand nav lang";
+      padding-block: 0.7rem;
     }
-    to {
-      @apply shadow-lg ring-1 backdrop-blur ring-white/10;
-    }
+    nav { margin: 0; justify-self: end; }
+    ul { padding: 0; }
   }
 </style>
