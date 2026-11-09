@@ -280,11 +280,11 @@ export const COPY: Record<Lang, Copy> = {
     nav: { projects: "Proyectos", experience: "Experiencia", about: "Sobre mí", contact: "Contacto" },
     skip: "Saltar al contenido",
     hero: {
-      kicker: "Pau Sevilla · Barcelona",
-      headline: "Hago apps móviles y webs.",
+      kicker: "Barcelona · inLab FIB",
+      headline: "Soy Pau Sevilla y desarrollo apps móviles y webs.",
       summary:
         "Estudio cuarto de Ingeniería Informática en la FIB y trabajo en el inLab desde diciembre de 2024, en webs para la universidad y en código C++ de grupos de investigación. Además publico mis propias apps, y Vademecum pasa de 10.000 descargas en Google Play.",
-      pitch: "¿Necesitas una app móvil o una web? Cuéntame tu idea.",
+      pitch: "¿Buscas a alguien que te haga una app o una web? Cuéntame tu idea.",
       cta: "Escríbeme",
       photoAlt: "Foto de Pau Sevilla",
     },
@@ -365,11 +365,11 @@ export const COPY: Record<Lang, Copy> = {
     nav: { projects: "Projects", experience: "Experience", about: "About", contact: "Contact" },
     skip: "Skip to content",
     hero: {
-      kicker: "Pau Sevilla · Barcelona",
-      headline: "I build mobile apps and websites.",
+      kicker: "Barcelona · inLab FIB",
+      headline: "I'm Pau Sevilla and I build mobile apps and websites.",
       summary:
         "I'm in my fourth year of Computer Engineering at FIB and, since December 2024, I've worked at inLab on web apps for the university and on C++ code for research groups. I also ship my own apps, and Vademecum has over 10,000 downloads on Google Play.",
-      pitch: "Need a mobile app or a website? Tell me about your idea.",
+      pitch: "Looking for someone to build your app or website? Tell me about your idea.",
       cta: "Get in touch",
       photoAlt: "Photo of Pau Sevilla",
     },
@@ -450,11 +450,11 @@ export const COPY: Record<Lang, Copy> = {
     nav: { projects: "Projectes", experience: "Experiència", about: "Sobre mi", contact: "Contacte" },
     skip: "Salta al contingut",
     hero: {
-      kicker: "Pau Sevilla · Barcelona",
-      headline: "Faig apps mòbils i webs.",
+      kicker: "Barcelona · inLab FIB",
+      headline: "Soc en Pau Sevilla i desenvolupo apps mòbils i webs.",
       summary:
         "Estudio quart d'Enginyeria Informàtica a la FIB i treballo a l'inLab des del desembre de 2024, en webs per a la universitat i en codi C++ de grups de recerca. A més, publico les meves pròpies apps, i Vademecum supera les 10.000 descàrregues a Google Play.",
-      pitch: "Necessites una app mòbil o una web? Explica'm la teva idea.",
+      pitch: "Busques algú que et faci una app o una web? Explica'm la teva idea.",
       cta: "Escriu-me",
       photoAlt: "Foto de Pau Sevilla",
     },

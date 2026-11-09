@@ -8,7 +8,6 @@ import XIcon from "@icons/XIcon.astro";
 import AppStoreIcon from "@icons/AppStoreIcon.astro";
 import GooglePlayIcon from "@icons/GooglePlayIcon.astro";
 import photo from "@/assets/pau.jpg";
-import inlabLogo from "@/assets/inlab.webp";
 import { type Lang } from "@/i18n";
 import { COPY, CONTACT, PROJECTS, type LinkKind } from "@data/site";
 
@@ -128,10 +127,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
       </header>
       <div class="exp">
         <aside class="org-card">
-          <a class="logo" href="https://inlab.fib.upc.edu/" target="_blank" rel="noopener">
-            <Image src={inlabLogo} alt="inLab FIB" width={180} />
-          </a>
-          <p class="org-name">{c.experience.org}</p>
+          <p class="org-name"><a href="https://inlab.fib.upc.edu/" target="_blank" rel="noopener">{c.experience.org}</a></p>
           <p class="org-role">{c.experience.role}</p>
           <p class="org-date">{c.experience.date}</p>
           <p class="org-blurb">{orgBlurb}</p>
@@ -251,7 +247,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
   .hero-text { display: contents; }
   .kicker { grid-area: kick; margin: 0; color: var(--accent); font-weight: 600; }
   .portrait { grid-area: photo; width: 112px; height: 132px; object-fit: cover; object-position: 50% 30%; border-radius: 8px; }
-  h1 { grid-column: 1 / -1; font-size: clamp(2.6rem, 11vw, 5rem); line-height: 1; letter-spacing: -0.025em; margin: 0.25rem 0 0; text-wrap: balance; }
+  h1 { grid-column: 1 / -1; font-size: clamp(2.3rem, 8.5vw, 4.1rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0.25rem 0 0; text-wrap: balance; }
   .summary { grid-column: 1 / -1; font-size: clamp(1.1rem, 3.6vw, 1.3rem); line-height: 1.55; max-width: 38em; margin: 0; }
   .pitch {
     grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.9rem 1.25rem;
@@ -289,9 +285,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
   /* Experiencia */
   .exp { display: grid; gap: 1.75rem; }
   .org-card { background: var(--accent-soft); border-radius: 12px; padding: 1.25rem; }
-  .logo { display: inline-block; background: #fff; border-radius: 8px; padding: 0.6rem 0.8rem; }
-  .logo :global(img) { display: block; width: 140px; height: auto; }
-  .org-name { margin: 1rem 0 0; font-family: var(--font-head); font-size: 1.35rem; }
+  .org-name { margin: 0; font-family: var(--font-head); font-size: 1.6rem; line-height: 1.15; }
+  .org-name a { color: var(--ink); text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent); text-underline-offset: 5px; }
+  .org-name a:hover { text-decoration-color: var(--ink); }
   .org-role { margin: 0.25rem 0 0; font-weight: 600; }
   .org-date { margin: 0.25rem 0 0; color: var(--accent); font-weight: 600; font-size: 0.95rem; }
   .org-blurb { margin: 0.75rem 0 0; color: var(--muted); font-size: 0.95rem; }
@@ -358,7 +354,6 @@ const pad = (n: number) => String(n).padStart(2, "0");
     .proj.featured .store-links { margin-top: 0.5rem; }
 
     .exp { grid-template-columns: 17rem 1fr; gap: 3rem; align-items: start; }
-    .org-card { position: sticky; top: 5rem; }
     .jobs li { grid-template-columns: 3.4rem 1fr; gap: 1rem; padding-block: 1.6rem; }
     .num { font-size: 2.4rem; }
 
