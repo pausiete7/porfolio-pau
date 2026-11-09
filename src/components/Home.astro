@@ -39,6 +39,20 @@ const orgBlurb = {
   ca: "Laboratori d'innovació i recerca de la Facultat d'Informàtica de Barcelona.",
 }[lang];
 const pad = (n: number) => String(n).padStart(2, "0");
+// Tipo de proyecto, junto al nombre
+const kindById: Record<string, "app" | "web" | "both"> = {
+  vademecum: "app",
+  "vademecum-vet": "app",
+  apto: "app",
+  parcelario: "app",
+  manipulador: "both",
+  flipebooks: "web",
+};
+const kindLabel = {
+  es: { app: "App", web: "Web", both: "Web y app" },
+  en: { app: "App", web: "Web", both: "Web & app" },
+  ca: { app: "App", web: "Web", both: "Web i app" },
+}[lang];
 // CV público (sin teléfono), en el idioma de la página
 const cv = {
   es: { href: "/cv/Pau-Sevilla-CV-ES.pdf", label: "Descargar CV (PDF)" },
@@ -101,7 +115,7 @@ const cv = {
                 <Image src={p.image} alt={t.imageAlt} widths={[240, 400, 600]} sizes="(min-width: 768px) 320px, 40vw" loading="lazy" />
               </div>
               <div class="proj-body">
-                <h3>{p.name} <span class="year">{p.year}</span></h3>
+                <h3>{p.name} <span class="kind">{kindLabel[kindById[p.id]]}</span> <span class="year">{p.year}</span></h3>
                 {t.metric && <p class="metric">{t.metric}</p>}
                 {t.metricNote && <p class="metric-note">{t.metricNote}</p>}
                 <p class="proj-text">{t.summary}</p>
@@ -281,6 +295,11 @@ const cv = {
   .proj-body { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
   .proj h3 { font-size: 1.45rem; line-height: 1.1; }
   .year { font-family: var(--font-body); font-size: 0.85rem; color: var(--muted); font-weight: 400; margin-left: 0.3rem; white-space: nowrap; }
+  .kind {
+    display: inline-block; vertical-align: 0.25em; margin-left: 0.35rem; padding: 0.1rem 0.45rem;
+    font-family: var(--font-body); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; white-space: nowrap;
+  }
   .metric { margin: 0; font-weight: 700; color: var(--accent); text-wrap: balance; }
   .metric-note { margin: -0.3rem 0 0; color: var(--muted); font-size: 0.95rem; }
   .proj-text { margin: 0; font-size: 1rem; }

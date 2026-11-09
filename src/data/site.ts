@@ -383,7 +383,7 @@ export const COPY: Record<Lang, Copy> = {
     experience: {
       title: "Experience",
       org: "inLab FIB (UPC)",
-      role: "Student developer · full-stack and scientific computing",
+      role: "Full-stack and scientific computing developer (student intern)",
       date: "Barcelona · since December 2024",
       now: "Now",
       items: [
