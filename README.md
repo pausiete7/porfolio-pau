@@ -1,46 +1,26 @@
-# Portfolio de Pau
+# pausevilla.com
 
-## 🚀 Tecnologías Utilizadas
+Source code of my personal site, [pausevilla.com](https://pausevilla.com): who I am, my work at inLab FIB, the apps I've published and my CV.
 
-Este portfolio está construido utilizando las siguientes tecnologías:
+## Stack
 
-### Frontend
+- [Astro 5](https://astro.build), static output
+- Tailwind CSS 3 and TypeScript (`astro check` runs before every build)
+- Three languages: English (default), Spanish and Catalan, using Astro's i18n routing
+- Deployed to GitHub Pages with GitHub Actions on every push to `main`, under a custom domain
 
-- **Astro** - Framework web moderno que ofrece rendimiento excepcional
-- **Angular** - Framework robusto para aplicaciones web dinámicas
+## Where things are
 
-### Características
+- `src/data/site.ts`: all the content (projects, experience, texts) in the three languages
+- `src/i18n/`: language config and helpers
+- `src/components/` and `src/layouts/`: the page and its sections
+- `public/`: CV PDFs, favicons, `robots.txt` and `sitemap.xml`
+- `.github/workflows/deploy.yml`: build and deploy
 
-- ⚡️ Rendimiento optimizado
-- 🎨 Diseño moderno y responsive
-- 💼 Showcase de proyectos
-- 🛠️ Sección de habilidades técnicas
-
-## 🛠️ Instalación
+## Run it locally
 
 ```
-# Clonar el repositorio
-git clone [url-del-repositorio]
-
-# Instalar dependencias
 npm install
-
-# Iniciar servidor de desarrollo
-npm run dev
-```
-
-## 📝 Estructura del Proyecto
-
-```
-/
-├── src/
-│   ├── components/
-│   │   ├── Projects.astro
-│   │   ├── ProjectDetail.astro
-│   │   └── Habilities.astro
-│   └── icons/
-│       ├── AstroIcon.astro
-│       ├── AngularIcon.astro
-│       └── LaravelIcon.astro
-└── package.json
+npm run dev      # http://localhost:4321
+npm run build    # type check and build to dist/
 ```
